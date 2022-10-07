@@ -12,13 +12,13 @@
 	
 	function placePiid(piid) { // ajax로 컨트롤에 보낸다!
 	// 여기에 document. 이런거해서 '선택한 Day' 이런것들 추가로 받아와서 더 보낼 예정!
-		let piname = document.queryselector("#placeName1").value;
+		let piname1 = document.queryselector("#placeName").value;
 	
 		$.ajax({
 			type : "POST",
 			url : "/traverSite/test",
 			data : {
-				"piid" : piid
+				"piid" : piid,
 				"piname" : piname
 			},
 			success : function(v) {
