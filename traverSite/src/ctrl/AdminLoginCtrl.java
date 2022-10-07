@@ -30,6 +30,10 @@ public class AdminLoginCtrl extends HttpServlet {
 			session.setAttribute("adminInfo", adminInfo);
 			// 로그인한 회원이 정보를 담은 loginInfo인스턴스를 세션의 속성으로 저장
 			response.sendRedirect(url);
+		} else {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script> alert('아이디와 암호를 확인하세요.'); history.back(); </script>");
 		}
 	}
 }
