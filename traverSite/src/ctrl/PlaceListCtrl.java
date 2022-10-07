@@ -82,7 +82,7 @@ public class PlaceListCtrl extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		out.println(placeList);
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("lmth/gotraver/map_test.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("lmth/gotraver/map_main.jsp");
 		dispatcher.forward(request,	response);
 	}
 
