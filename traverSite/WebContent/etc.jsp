@@ -44,7 +44,7 @@ for (int i = 0; i < addPlaceList.size(); i++) {
 <!-- 장소 추가하는 버튼! 오른쪽 사이드박스의 추가버튼. 누르면 ajax로 value값을 보내고, 그 값을 세션에 저장!-->
 <button value="abcd" name="add123" id="addButton" onclick="placePiid(this.value)" >추가</button>
 <span id="placeName1" value="제주항"></span>
-<h2>안녕하세요 브런치 실험입니다. 브런치 얘기하니까 배가고프네요.</h2>
+<h2>안녕하세요 브런치 실험입니다. 브런치 얘기하니까 배가고프네요</h2>
 </form>
 
 </body>
