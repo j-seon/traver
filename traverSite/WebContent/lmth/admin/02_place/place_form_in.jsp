@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="vo.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -134,48 +135,47 @@ function checkSize(input) {
          <div class="place_02_h2">
             <h2>장소 등록</h2>
          </div>
-         <form name="">
+         <form name="frm_place_in" action="/traverSite/placeProcIn" method="post">
             <div class="place_02_tab01">
                <h3>장소 기본 정보</h3>
                <table>
                <tbody>
                   <tr>
                      <th scope="row">장소명</th>
-                     <td><input type="text"></td>
-                     <th scope="row">번호</th>
-                     <td><input type="text"></td>
+                     <td><input type="text" name="pf_name"></td>
+                     <th scope="row">전화번호</th>
+                     <td><input type="text" name="pf_phone"></td>
                   </tr>
                   <tr>
                      <th scope="row">홈페이지</th>
-                     <td><input type="text"></td>
+                     <td><input type="text" name="pf_homepage"></td>
                      <th scope="row">분류</th>
-                     <td><select class="sel_style">
-                           <option value="음식점">음식점</option>
-                           <option value="숙소">숙소</option>
-                           <option value="관광지">관광지(놀거리, 명소 등)</option>
+                     <td><select class="sel_style" name="pf_ctgr">
+                     	   <option value="1">숙소</option>
+                           <option value="2">음식점</option>
+                           <option value="3">관광지(놀거리, 명소 등)</option>
                      </select></td>
                   </tr>
                   <tr>
                      <th scope="row">위치</th>
                      <td colspan="3">
                         <div class="location_sty_01">
-                           <input type="text" id="sample6_postcode" placeholder="우편번호" disabled="disabled"> 
+                           <input type="text" id="sample6_postcode" placeholder="우편번호" readonly="readonly" name="pf_postcode"> 
                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="vertical-align: middle;">
                         </div>
                         <div class="location_sty_02"> 
-                           <input type="text" id="sample6_address" placeholder="주소" disabled="disabled">
+                           <input type="text" id="sample6_address" placeholder="주소" readonly="readonly" name="pf_address">
                         </div>
                         <div class="location_sty_03">
-                           <input type="text" id="sample6_detailAddress" placeholder="상세주소"> 
-                           <input type="text" id="sample6_extraAddress" placeholder="여분주소">
+                           <input type="text" id="sample6_detailAddress" placeholder="상세주소" name="pf_detailAddress"> 
+                           <input type="text" id="sample6_extraAddress" placeholder="여분주소" name="pf_extraAddress">
                         </div>
-                         <input type="hidden" id="sample6_addressCoords" value=""/>
+                         <input type="hidden" id="sample6_addressCoords" value="" name="pf_addressCoords">
                      </td>
                   </tr>
                   <tr>
                      <th scope="row">설명</th>
-                     <td colspan="3"><textarea rows="15" cols="2"
-                           style="height: 200px; width: 800px;"></textarea></td>
+                     <td colspan="3"><textarea rows="15" cols="2" style="height: 200px; width: 800px;" name="pf_text"></textarea></td>
                   </tr>
                   <tr>
                      <th scope="row">이미지(썸네일)</th>
@@ -183,7 +183,7 @@ function checkSize(input) {
                         <div class="filebox">
                            <input class="upload-name" value="파일선택" disabled="disabled">
                            <label for="filename">업로드</label> 
-                           <input type="file" id="filename" name="file_path" class="upload-hidden" accept="image/png, image/jpeg" onchange="checkSize(this)">
+                           <input type="file" id="filename" name="file_path_ssum" class="upload-hidden" accept="image/png, image/jpeg" onchange="checkSize(this)">
                            <span class="imgSel">＊이미지 크기는 2MB이하로 해주세요. (등록 가능한 이미지 JPG, PNG, JPEG)</span>
                         </div>
                      </td>
@@ -195,23 +195,23 @@ function checkSize(input) {
                         <div class="filebox" style="margin-bottom: 10px;">
                            <input class="upload-name" value="파일선택" disabled="disabled">
                            <label for="ex_filename_01">업로드</label>
-                           <input type="file" id="ex_filename_01" name="file_path" class="upload-hidden" onchange="checkSize(this)">
+                           <input type="file" id="ex_filename_01" name="file_path1" class="upload-hidden" onchange="checkSize(this)">
                            <!-- <input type="button" value="추가" class="file_in_sel" id="button-add-file">  -->
                         </div>
                         <div class="filebox" style="margin-bottom: 10px;">
                            <input class="upload-name" value="파일선택" disabled="disabled">
                            <label for="ex_filename_02">업로드</label>
-                           <input type="file" id="ex_filename_02" name="file_path" class="upload-hidden" onchange="checkSize(this)">
+                           <input type="file" id="ex_filename_02" name="file_path2" class="upload-hidden" onchange="checkSize(this)">
                         </div>
                         <div class="filebox" style="margin-bottom: 10px;">
                            <input class="upload-name" value="파일선택" disabled="disabled">
                            <label for="ex_filename_03">업로드</label>
-                           <input type="file" id="ex_filename_03" name="file_path" class="upload-hidden" onchange="checkSize(this)">
+                           <input type="file" id="ex_filename_03" name="file_path3" class="upload-hidden" onchange="checkSize(this)">
                         </div>
                         <div class="filebox" style="margin-bottom: 10px;">
                            <input class="upload-name" value="파일선택" disabled="disabled">
                            <label for="ex_filename_04">업로드</label>
-                           <input type="file" id="ex_filename_04" name="file_path" class="upload-hidden" onchange="checkSize(this)">
+                           <input type="file" id="ex_filename_04" name="file_path4" class="upload-hidden" onchange="checkSize(this)">
                         </div>
                         </div>
                      </td>
@@ -221,7 +221,7 @@ function checkSize(input) {
             </div>
             <div class="confirm">
                <input type="button" value="취소" class="place_02_btn1" onclick="location.href='./place_list.jsp'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <input type="button" value="확인" class="place_02_btn2" onclick="location.href='./place_list.jsp'">
+               <input type="submit" value="확인" class="place_02_btn2" style="cursor: pointer;">
             </div>
          </form>
       </div>
