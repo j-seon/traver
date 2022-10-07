@@ -10,7 +10,7 @@ if (adminInfo != null) {
 request.setCharacterEncoding("utf-8");
 String url = request.getParameter("url"); // 로그인 후 이동할 페이지 주소
 if (url == null) {
-	url = "admin_main.jsp";
+	url = "/traverSite/lmth/admin/admin_main.jsp";
 	// 로그인 후 이동할 페이지주소가 없는 경우 메인화면으로 지정
 }
 %>
@@ -41,10 +41,11 @@ if (url == null) {
 	<div class="container">
 		<div class="inner">
 			<h2>관리자 로그인</h2>
-			<form action="adminLogin" name="frmLogin" method="post">
+			<form action="/traverSite/adminLogin" name="frmLogin" method="post">
+			<input type="hidden" name="url" value="<%=url %>" />
 			<div>
-				<label for="uid">아이디 : </label> <input type="text" name="uid" id="uid" value="admin"><br>
-				<label for="uid">비밀번호 : </label> <input type="password" name="pwd" id="pwd" value="1111">
+				<label for="id">아이디 : </label> <input type="text" name="id" id="id" value="admin"><br>
+				<label for="pw">비밀번호 : </label> <input type="password" name="pw" id="pw" value="1111">
 			</div>
 			<div>
 				<input type="submit" value="로그인">
