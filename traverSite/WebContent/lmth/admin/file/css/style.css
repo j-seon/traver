@@ -1,0 +1,229 @@
+@charset "UTF-8";
+
+/* 공통 css */
+h2{font-size : 35px; font-weight: 500; padding : 40px 0px;}
+h3{font-size : 24px; font-weight: 500; padding : 0 0 20px;}
+
+
+/* 헤더 시작 */
+
+a:link, a:visited, a:hover, a:active {color: #333;}
+
+header .container {width: 100%; margin: 0 auto; display : flex; justify-content: space-between;}
+header {position: sticky; display : flex; align-items:center; width:100%; height: 100px;top:0; padding : 0 80px; box-sizing:border-box; background: white; border-bottom: 1px solid gray;}
+header .nav1{display : flex; align-items: center;}
+header .nav1 .logo{margin-right : 100px;}
+header .nav1 .logo a{display : inline-block;}
+header .nav1 .logo a img{width : 80px;}
+header nav ul{display : flex;}
+header nav ul li a{display : inline-block; font-size : 18px; font-weight : 500; padding : 25px 35px; color : #333;}
+header nav ul li a:hover{color : #1ebbab;}
+header .nav2{display : flex; align-items: center;}
+header .nav2 ul li a{display : inline-block; padding : 25px 10px; color : #333;}
+
+/* 헤더 종료 */
+
+
+
+/* 컨텐츠 시작 */
+/* mem_01 시작 */
+.main .container{width : 100%; padding : 0 0px; box-sizing : border-box;}
+.main .container .mem_contents{width : 100%;padding : 0px 0px 40px; box-sizing : border-box;}
+.main .container .mem_contents .subM{display : flex; justify-content: space-between;}
+.main .container .mem_contents .subM input, .mem_contents .subM select{vertical-align: middle; height : 40px; box-sizing:border-box; background :inherit; border : 1px solid #ccc; padding : 10px;}
+.mem_contents .subM select{padding-right : 5px; width: 100px;}
+.main .container .mem_contents .subM ul{display : flex;}
+.main .container .mem_contents .subM ul li{margin-left : 10px;}
+.main .container .mem_contents .subM ul li .count{vertical-align: middle;padding: 11px;display: inline-block;border : 1px solid #ccc;}
+
+.main .mem_table{width : 100%; padding : 0 0px; box-sizing : border-box;}
+.main .mem_table table{width: 100%;}
+.main .mem_table table th, .main .mem_table table td{border : 1px solid #ccc; padding : 10px;}
+/* mem_01 끝 */
+
+
+/* mem_02 시작 */
+
+main .container .mem_02_tab01, .mem_02_tab02{width : 100%; padding : 0 80px; margin-bottom: 60px; box-sizing: border-box;}
+.mem_02_tab01 table, .mem_02_tab02 table{width : 100%;}
+.mem_02_contents table th{width : 200px;}
+.mem_02_contents table td{width : calc(50% - 200px);}
+.mem_02_contents table th, .mem_02_contents table td{border: 1px solid #ccc; padding : 10px;}
+.mem_02_contents .container .mem_02_h2 {padding: 0 0 0 80px;}
+.mem_02_contents .confirm{position : static; text-align : center;}
+.mem_02_contents .confirm input{font-size : 16px; font-weight: 600; padding : 12px 40px; border-radius : 5px; border : 0px solid #ccc;}
+.mem_02_contents .confirm input:nth-of-type(2){color : #fff; background-color : #1ebbab;}
+
+/* mem_02 끝 */
+
+
+/* place_01 시작 */
+
+.place_main .container {width : 100%; padding : 0 80px; box-sizing : border-box;}
+.place_main .container .place_contents{padding: 0 0 40px;}
+.place_main .container .place_contents h2{font-size : 35px; font-weight: 500; padding : 40px 0;}
+.place_main .container .place_contents .subP{display : flex; justify-content: space-between;}
+.place_main .container .place_contents .subP input, .place_contents .subP select{vertical-align: middle; height : 40px; box-sizing:border-box; background :inherit; border : 1px solid #ccc; padding : 10px;}
+.place_main .subP select{padding-right : 5px; width: 100px;}
+.place_main .container .place_contents .subP ul{display : flex;}
+.place_main .container .place_contents .subP ul li{margin-left : 10px;}
+.place_main .container .place_contents .subP ul li .count{vertical-align: middle;padding: 11px;display: inline-block;border : 1px solid #ccc;}
+.place_main .container .place_contents .subP ul li a{}
+
+.place_main .place_table{width : 100%; padding : 0 0px; box-sizing : border-box;}
+.place_main .place_table table{width: 100%;}
+.place_main .place_table table th, .place_main .place_table table td{border : 1px solid #ccc; padding : 10px;}
+
+/* place_01 끝 */
+
+
+/* place_02 시작 */
+.place_02_contents table {width: 100%;}
+.place_02_contents table th{width : 200px; vertical-align: middle;}
+.place_02_contents table td{width : calc(50% - 200px);}
+.place_02_contents table th, .place_02_contents table td{border: 1px solid #ccc; padding : 10px;}
+.place_02_contents .container .place_02_h2 {padding: 0 0 0 80px;}
+.place_02_contents .container .place_02_tab01 {padding: 0 80px 0; margin-bottom: 60px;}
+.place_02_contents .confirm{position : static; text-align : center; margin-bottom: 60px;}
+.place_02_contents .confirm input{font-size : 16px; font-weight: 600; padding : 12px 40px; border-radius : 5px; border : 0px solid #ccc;}
+.place_02_contents .confirm input:nth-of-type(2){color : #fff; background-color : #1ebbab;}
+
+.place_02_contents .container .place_02_tab01 .imgSel {font-size: 12px; padding-left: 10px; color: gray;}
+
+.place_02_contents .container .place_02_tab01 .location_sty_01 {margin-bottom: 10px;}
+.place_02_contents .container .place_02_tab01 .location_sty_02 {margin-bottom: 10px;}
+
+
+/* 이미지 업로드 */
+.filebox input[type="file"] { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip:rect(0,0,0,0); border: 0;}
+.filebox label { display: inline-block; padding: .5em .75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em;}
+.filebox .upload-name { display: inline-block; padding: .5em .75em; font-size: inherit; font-family: inherit; line-height: normal; vertical-align: middle; background-color: #f5f5f5; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: .25em; -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+.filebox .file_in_sel {display: inline-block; padding: 0.5em 0.75em; color: #999; font-size: inherit; line-height: normal; vertical-align: middle; background-color: #fdfdfd; cursor: pointer; border: 1px solid #ebebeb; border-bottom-color: #e2e2e2; border-radius: 0.25em;}
+/* 이미지 업로드 */
+
+/* place_02 끝 */
+
+
+
+/* report_01 시작 */
+
+.report_contents .container {width : 100%; padding : 0 80px; box-sizing : border-box;}
+.report_contents .container .contents{padding: 0 0 40px;}
+.report_contents .container .contents h2{font-size : 35px; font-weight: 500; padding : 40px 0;}
+.report_contents .container .contents .subR{display : flex; justify-content: space-between;}
+.report_contents .container .contents .subR input, .report_contents .subR select{vertical-align: middle; height : 40px; box-sizing:border-box; background :inherit; border : 1px solid #ccc; padding : 10px;}
+.report_contents .subR select{padding-right : 5px; width: 150px;}
+.report_contents .container .contents .subR ul{display : flex;}
+.report_contents .container .contents .subR ul li{margin-left : 10px;}
+.report_contents .container .contents .subR ul li a{}
+
+.report_contents .report_table{width : 100%; padding : 0 0px; box-sizing : border-box;}
+.report_contents .report_table table{width: 100%;}
+.report_contents .report_table table th, .report_contents .report_table table td{border : 1px solid #ccc; padding : 10px;}
+
+/* report_01 끝 */
+
+
+
+/* bbs_01 시작 */
+/* 서브메뉴  시작 */
+.content{display : flex;}
+.content .inner{display : flex; width: 100%;}
+.content .sub_nav{width : 250px; height : 100vh; background : #f1f1f1; border-right : #666; padding : 28px 0px;}
+.content .sub_nav h2{padding : 40px 0px; font-size : 24px; text-align : center;}
+.content .sub_nav ul{}
+.content .sub_nav ul li{}
+.content .sub_nav ul li a{ display : inline-block; padding : 20px 0; text-align : center; color : #333; width : 100%;}
+.content .sub_nav ul li a:hover{color : #fff; background-color : #666;}
+
+.content .content_area{width : calc(100% - 200px); background : #fff; padding : 20px; box-sizing : border-box;}
+/* 서브메뉴  끝 */
+
+
+.main .container {width : 100%; padding : 0 80px; box-sizing : border-box;}
+.main .container .bss_contents{padding: 0 0 40px;}
+.main .container .bss_contents h2{font-size : 35px; font-weight: 500; padding : 40px 0;}
+.main .container .bss_contents .subB{display : flex; justify-content: space-between;}
+.main .container .bss_contents .subB input, .bss_contents .subB select{vertical-align: middle; height : 40px; box-sizing:border-box; background :inherit; border : 1px solid #ccc; padding : 10px;}
+.main .subB select{padding-right : 5px; width: 150px;}
+.main .container .bss_contents .subB ul{display : flex;}
+.main .container .bss_contents .subB ul li{margin-left : 10px;}
+.main .container .bss_contents .subB ul li .count{vertical-align: middle;padding: 11px;display: inline-block;border : 1px solid #ccc;}
+.main .container .bss_contents .subB ul li a{}
+
+.main .bbs_table{width : 100%; padding : 0 0px; box-sizing : border-box;}
+.main .bbs_table table{width: 100%;}
+.main .bbs_table table th, .main .bbs_table table td{border : 1px solid #ccc; padding : 10px;}
+
+/* bss_01 끝 */
+
+
+
+/* bss_01_sub 시작 */
+
+
+
+/* bss_01_sub 끝 */
+
+
+
+/* bbs_02 시작 */
+
+.content{display : flex;}
+.content .inner{display : flex; width: 100%;}
+.content .sub_nav{width : 250px; height : 100vh; background : #f1f1f1; border-right : #666; padding : 28px 0px;}
+.content .sub_nav h2{padding : 40px 0px; font-size : 24px; text-align : center;}
+.content .sub_nav ul{}
+.content .sub_nav ul li{}
+.content .sub_nav ul li a{ display : inline-block; padding : 20px 0; text-align : center; color : #333; width : 100%;}
+.content .sub_nav ul li a:hover{color : #fff; background-color : #666;}
+
+.content .content_area{width : calc(100% - 200px); background : #fff; padding : 20px; box-sizing : border-box;}
+
+.main_bbs_02 .container {width : 100%; padding : 0 80px; box-sizing : border-box;}
+.main_bbs_02 .container .bbs_02_contents{padding: 0 0 40px;}
+.main_bbs_02 .container .bbs_02_contents h2{font-size : 35px; font-weight: 500; padding : 40px 0;}
+.main_bbs_02 .container .bbs_02_contents .subB{display : flex; justify-content: space-between;}
+.main_bbs_02 .container .bbs_02_contents .subB input, .bbs_02_contents .subB select{vertical-align: middle; height : 40px; box-sizing:border-box; background :inherit; border : 1px solid #ccc; padding : 10px;}
+.main_bbs_02 .subB select{padding-right : 5px; width: 150px;}
+.main_bbs_02 .container .bbs_02_contents .subB ul{display : flex;}
+.main_bbs_02 .container .bbs_02_contents .subB ul li{margin-left : 10px;}
+.main_bbs_02 .container .bbs_02_contents .subB ul li .count{vertical-align: middle;padding: 11px;display: inline-block;border : 1px solid #ccc;}
+.main_bbs_02 .container .bbs_02_contents .subB ul li a{}
+
+.main_bbs_02 .bbs_table{width : 100%; padding : 0 0px; box-sizing : border-box;}
+.main_bbs_02 .bbs_02_table table{width: 100%;}
+.main_bbs_02 .bbs_02_table table th, .main_bbs_02 .bbs_02_table table td{border : 1px solid #ccc; padding : 10px; vertical-align: middle;}
+
+.main_bbs_02 .bbs_02_table #btn2 {}
+.main_bbs_02 .bbs_02_table .bbs_02_review_img {width: 14px; margin-left: 15px; vertical-align: bottom;}
+
+/* bbs_02 끝 */
+
+
+
+/* sch_01 시작 */
+
+.main .container {width : 100%; padding : 0 80px; box-sizing : border-box;}
+.main .container .sch_contents{padding: 0 0 40px;}
+.main .container .sch_contents h2{font-size : 35px; font-weight: 500; padding : 40px 0;}
+.main .container .sch_contents .subS{display : flex; justify-content: space-between;}
+.main .container .sch_contents .subS input, .sch_contents .subS select{vertical-align: middle; height : 40px; box-sizing:border-box; background :inherit; border : 1px solid #ccc; padding : 10px;}
+.main .subB select{padding-right : 5px; width: 150px;}
+.main .container .sch_contents .subS ul{display : flex;}
+.main .container .sch_contents .subS ul li{margin-left : 10px;}
+.main .container .sch_contents .subS ul li .count{vertical-align: middle;padding: 11px;display: inline-block;border : 1px solid #ccc;}
+.main .container .sch_contents .subS ul li a{}
+
+.main .schs_table{width : 100%; padding : 0 0px; box-sizing : border-box;}
+.main .schs_table table{width: 100%;}
+.main .schs_table table th, .main .schs_table table td{border : 1px solid #ccc; padding : 10px;}
+
+/* sch_01 끝 */
+
+
+/* 컨텐츠 종료 */
+
+
+
+

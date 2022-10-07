@@ -1,0 +1,149 @@
+@charset "UTF-8";
+
+/* 헤더영역 css */
+html {
+	
+}
+.header {
+	position: sticky;
+	width: 100%;
+	height: 100px;
+	background-color: #fff;
+	box-shadow: 0px 3px 7px 0px rgb(28 175 214 / 11%);
+	display: flex;
+}
+.header_area {
+	position: fixed;
+	margin: auto; /* header의 양쪽 여백(margin)을 동등하게 맞춤 -> 수평가운데정렬 */
+	width: 1200px;
+	height: 76px;
+	display: flex;
+	align-items: center;
+	position: relative;
+	background-color: #fff;
+	text-align: center;
+    justify-content: space-around;
+	z-index: 100;
+ }
+
+.logo_box {
+	width: 10px;
+}
+#logo {
+	height: 60px;
+	width: 80px;
+/* 	border: 1px solid #00f; */
+	padding-top: 5px;
+	object-fit: contain;
+	
+} 
+
+.header-gnb {
+	text-align: center;
+	justify-content: flex-start;
+}
+
+.service-logout {
+	margin-left: 12px;
+}
+
+
+.header-gnb>ul {
+	display:flex;
+}
+
+
+.gnb_link_menu {
+	display: block;
+	padding: 0 41px;
+	line-height: 72px;
+	font-weight: 700;
+	color: var(--baseForeground);
+/* 	border: 1px solid #f00; */
+	display: inline-block;
+}
+
+.gnb_link_sub {
+	position: absolute;
+    top: 70px;
+    padding: 0 24px;
+	background: var(--baseForeground);
+	white-space: pre-line;
+	box-sizing: border-box;
+	z-index: 20;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+    background-color: #fff;
+    border-style: solid;
+    border-width: 0 1px 1px 1px;
+    border-color: #444;
+    display: none;
+}
+.link_sub1 {
+	position: absolute;
+    width: 156px;
+    left: 523px;
+}
+.link_sub2 {
+	position: absolute;
+    width: 167px;
+    left: 681px;
+}
+.main_text {font-size: 20px;
+    position: absolute;
+    top: 25%;
+    left: 61%;
+    text-align: right;}
+    
+.main_text h1 {font-size: 80px;
+    color: #1ebbab;
+    font-weight: 500;}
+    
+.main_text h2 {font-size: 68px;
+    color: #1ebbab;
+    font-weight: lighter;}
+    
+.main_text h3 {font-size: 30px;
+    color: white;
+    margin-top: 20px;}
+
+
+
+/* 컨테이너 영역 */
+body {
+	
+}
+
+.container {
+	width: 100%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    background-color: #fff;
+}
+.container-default_box {
+	width:1200px;
+    height:100%;
+    margin:0 auto;
+}
+.container-main_image_box {
+	
+}
+.container-main_image{
+  	width:100%;
+}
+
+/* 푸터영역 css */
+.footer {
+	width: 100%;
+	height: 80px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 14px;
+	background-color: #999;
+}
+.team_info {
+	text-align: center;
+}
