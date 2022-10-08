@@ -24,7 +24,7 @@ hr { margin: 15px 0;}
 #schname, #placename { font-size: 20px; font-weight: bold; }
 #schdetail { font-size: 15px; }
 #dayselect { width: 100px; height: 30px; }
-#map { border: 1px solid black; }
+#map { border: 1px solid #888; }
 #contentbox { width: 100%; margin-bottom: 20px;  }
 #update, #delete { float: left; margin-right: 5px; }
 #list { float: right; top: -500px;  }
@@ -34,9 +34,10 @@ hr { margin: 15px 0;}
 	width: 600px; margin: auto; border: 1px solid black; 
 	padding: 20px 20px 20px 20px; background-color: #fff;
 	position: absolute; top: 225px; left: 280px;   
+	z-index: 3;
 }
 #x { float: right; width: 20px; }
-#placeimg { width: 300px; height: 300px; margin-bottom: 5px; }
+#placeimg1 { width: 300px; height: 300px; margin-bottom: 5px; }
 .descimg { width:65px; height:65px; margin-right:8px; padding-bottom:0px; }
 #placedesc { float: right; }
 #placedetail { width: 270px; }
@@ -73,8 +74,12 @@ function postDel() {
 </script>
 <script>
 	function swapImg(img) {
-		var big = document.getElementById("placeimg");
+		var big = document.getElementById("placeimg1");
 		big.src = "../../file/img/" + img;
+	}
+	function bigImg() {
+		var big = document.getElementById("placeimg1");
+		big.src = "../../file/img/silla1.jpg";
 	}
 </script>
 </head>
@@ -120,7 +125,7 @@ function postDel() {
    			<a href="mbti_list.jsp"><button type="button" class="btn" id="list"><img src="../../file/img/" id="list" alt="목록"></button></a>
    		</div>
    		<div class="display_none" id="section2">
-   			<img src="../../file/img/silla1.jpg" id="placeimg">
+   			<img src="../../file/img/silla1.jpg" id="placeimg1">
 			<div id="placedesc">
 			<img src="../../file/img/x.png" id="x"><br>
 				<br>
@@ -137,10 +142,10 @@ function postDel() {
 				</div>
 				</div>
 			</div>
-			<img src="../../file/img/silla1.jpg" id="placeimg1" class="descimg" onclick="swapImg('silla1.jpg');">
-			<img src="../../file/img/silla2.jpg" id="placeimg2" class="descimg" onclick="swapImg('silla2.jpg');">
-			<img src="../../file/img/silla3.jpg" id="placeimg3" class="descimg" onclick="swapImg('silla3.jpg');">
-			<img src="../../file/img/silla4.jpg" id="placeimg4" class="descimg" onclick="swapImg('silla4.jpg');">
+			<img src="../../file/img/silla2.jpg" id="placeimg2" class="descimg" onmouseover="swapImg('silla2.jpg');" onmouseout="bigImg();">
+			<img src="../../file/img/silla3.jpg" id="placeimg3" class="descimg" onmouseover="swapImg('silla3.jpg');" onmouseout="bigImg();">
+			<img src="../../file/img/silla4.jpg" id="placeimg4" class="descimg" onmouseover="swapImg('silla4.jpg');" onmouseout="bigImg();">
+			<img src="../../file/img/silla5.jpg" id="placeimg5" class="descimg" onmouseover="swapImg('silla5.jpg');" onmouseout="bigImg();">
 		</div>
    </div>
 </div>
