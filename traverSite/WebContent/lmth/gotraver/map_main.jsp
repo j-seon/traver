@@ -318,7 +318,7 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 	    display: flex;
 	    position: absolute;
 	    left: 300px;
-	    top: 100px;
+	    top: 30px;
 	    z-index: 3;
 	    height: 25px;
 	    gap: 10px;
@@ -622,6 +622,7 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 		$( ".schedule-list" ).sortable();
 		// 스케줄 드래그앤 드롭 함수
 	} );
+	
 	function scheDel() {
 		alert('일정 삭제 이벤트 발생');
 		// 스케줄 삭제 X버튼 함수
@@ -630,6 +631,60 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 		alert('일차 전체 삭제 이벤트 발생');
 		// Day 일차 전체삭제 버튼 함수
 	}
+	
+	function removeDa() { // 시작일자 선택 시 종료일자 컨트롤 활성화
+		document.getElementById('edate').removeAttribute('disabled');	
+	}
+	
+	function limitDate() { // 종료일자 값 제한
+		var sdate = document.getElementById('sdate');
+		var edate = document.getElementById('edate');
+		var strDate1 = sdate.value;
+		var strDate2 = edate.value;
+		var arr1 = strDate1.split('-');
+		var arr2 = strDate2.split('-');
+		var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
+		var dat2 = new Date(arr2[0], arr2[1], arr2[2]);
+		var diffDay = (dat2 - dat1) / ( 24 * 60 * 60 * 1000);
+		
+		if ( edate.value < sdate.value ) { // 종료일이 시작일보다 이를 경우
+			alert('여행 종료일은 시작일 이후로 입력해주세요');
+			edate.value = sdate.value;
+		} else if ( diffDay > 9 ) { // 10일 이상일 경우
+			alert('트레버 여행 일정은 최대 10일까지 가능합니다.');
+			edate.value = dat2.getFullYear() + "-" + dat2.getMonth() + "-" + (dat1.getDate() + 9) ;
+		}
+	}
+	
+	function setDay(sdate, edate, target) {	// 선택한 날짜를 계산하여 day(일차) select의 option을 변경
+		
+		var strDate1 = sdate;
+		var strDate2 = edate;
+		var arr1 = strDate1.split('-');
+		var arr2 = strDate2.split('-');
+		var dat1 = new Date(arr1[0], arr1[1], arr1[2]);
+		var dat2 = new Date(arr2[0], arr2[1], arr2[2]);
+		var diffDay = (dat2 - dat1) / ( 24 * 60 * 60 * 1000);
+		
+		for (var i = target.options.length -1; i >= 0; i--) {
+			target.options[i] = null;
+		}	// 기존 day 삭제
+		
+		if ( sdate != "" && edate != "" ) {
+			for ( var i = 0; i < diffDay + 1; i++) {
+				target.options[i] = new Option("day" + (i+1) + "", i+1);
+			}
+			target.options[0].selected = true;
+		}
+	}
+	
+	function enterkey(searchKeyword) {
+		if (window.event.keyCode == 13) {
+			alert(searchKeyword);
+			placeSearchChange(searchKeyword);
+	    }
+	}
+	
 	function schDel() {
 		alert('검색어 삭제 이벤트 발생');
 		// 검색어 삭제 X버튼 함수
@@ -674,9 +729,7 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 		var big = document.getElementById("placeimg");
 		big.src = "../../file/img/" + img;
 	}
-  </script>
-<script>
-	function 
+
 	function placeCategoryChange(placeCategory) {
 	// 카테고리 변경
 		$.ajax({
@@ -688,6 +741,22 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 			success : function(placeList) {
 				if (placeList.size() == 0) {
 					alert("카테고리 변경에 실패했습니다.\n다시 시도하세요.");
+				}
+			}
+		});
+	}
+	
+	function placeSearchChange(searchKeyword) {
+	// 검색어로 장소 리스트 변경
+		$.ajax({
+			type : "POST",
+			url : "/traverSite/placeList",
+			data : {
+				"searchKeyword" : searchKeyword, 
+			},
+			success : function(placeList) {
+				if (placeList.size() == 0) {
+					alert("검색에 실패했습니다.\n다시 시도하세요.");
 				}
 			}
 		});
@@ -723,18 +792,16 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 		<button class="side__open left_open"><img src="../../file/img/open.png" class="side__open_img"></button>
 	</div>
 </div>
-</form>
 <!-- //좌측 사이드 박스 -->
 
 
  
 
 <!-- 우측 사이드 박스 -->
-<form action="#">
 <div class="right-side open">
 	<div class="right-side_header">
 		<div class="search-box">
-			<input type="text" class="search__txt" placeholder="검색어를 입력하세요" />
+			<input type="text" class="search__txt" placeholder="검색어를 입력하세요" onkeyup="enterkey(this.value)"/>
 			<button class="schedule__del search__del" value="X" onclick="schDel()">X</button>
 		</div>
 		<div class="ctgr-box">
@@ -766,10 +833,10 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 					<div class="place-info">
 						<div class="place__title"><%=pi.getPi_name() %></div>
 						<div class="place__option-box">
-							<button id="place_info" value="" class="place__option place__info">정보</button>
-							<button id="place_add" class="place__option place__add" value="<%= pi.getPi_id()%>">추가</button>
-							<button id="place_review" class="place__option place__review">리뷰</button>
-							<button id="place_love" class="place__option place__love">찜</button>
+							<button class="place__option place__info">정보</button>
+							<button class="place__option place__add">추가</button>
+							<button class="place__option place__review">리뷰</button>
+							<button class="place__option place__love">찜</button>
 						</div>
 					</div>
 				</div>
@@ -852,7 +919,7 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 	</div>
 	<button class="side__open right_open"><img src="../../file/img/open.png" class="side__open_img"></button>
 </div>
-</form>
+
 <!-- //우측 사이드 박스 -->
 
 
@@ -861,41 +928,18 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 <div class="main">
 	<div class="main-top_area">
 		<div class="schedule_date">
-			 <script>
-		     $(function(){
-		         // 시작날짜와 끝나는 날짜를 함께 선택해서 사용할때
-		         var dates = $( "#datepicker_from, #datepicker_to" ).datepicker({
-		             // defaultDate: "+1d",  // 기본선택일이 1 week 이후가 선택되는 옵션
-		             // maxDate: "datepicker_from" + "+10d",
-		             changeMonth: true,
-		             dateFormat: "yy-mm-dd",  //  년월일 표시방법  yy-mm-dd 또는 yymmdd
-		             numberOfMonths: 2,  // 한눈에 보이는 월달력수
-		             onSelect: function( selectedDate ) {
-		                 var option = this.id == "datepicker_from" ? "minDate" : "maxDate",
-		                 instance = $( this ).data( "datepicker" ),
-		                 date = $.datepicker.parseDate(
-		                 instance.settings.dateFormat ||
-		                 $.datepicker._defaults.dateFormat,
-		                 selectedDate, instance.settings );
-		                 dates.not( this ).datepicker( "option", option, date );
-		             }
-		         });
-		     });
-			 </script>
-		     <input type="text" name="wr_1" class="frm_input" readonly id="datepicker_from" placeholder="22-10-04" value=""> ~
-		     <input type="text" name="wr_2" class="frm_input" readonly id="datepicker_to" placeholder="22-10-05" value="">
+			 <input type="date" class="" id="sdate" name="sdate" onchange="removeDa();">~
+			 <input type="date" id="edate" name="edate" disabled onchange="limitDate(); setDay(this.form.sdate.value, this.value, this.form.schedule_day);">
 		</div>
 		<div class="">
 			<select name="schedule_day" class="schedule_day">
-				<option value="" class="schedule_day1">day1</option>
-				<option value="" class="schedule_day2">day2</option>
-				<option value="" class="schedule_day3">day3</option>
+				<option value="" class="schedule_day1">일차 선택</option>
 			</select>
 			<select name="schedule_group" class="schedule_group" id="">
-				<option value="">전체보기</option>
-				<option value="">추가한 장소</option>
-				<option value="">찜한 장소</option>
-				<option value="">추가 + 찜한 장소</option>
+				<option value="1">전체보기</option>
+				<option value="2">추가한 장소</option>
+				<option value="3">찜한 장소</option>
+				<option value="4">추가 + 찜한 장소</option>
 			</select>
 		</div>
 	</div>
@@ -972,8 +1016,8 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 	</div>
 	<!-- //일정 보러가기 -->
 </div>
+</form>
 <!-- //컨테이너 -->
-
 
 
 <%@ include file="place_review.jsp" %>
@@ -996,8 +1040,8 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 <script>
 	var mapContainer = document.getElementById('map'),  // 지도를 표시할 div 
 	mapOption = { 
-	    center: new kakao.maps.LatLng(33.4080, 126.60000), // 지도의 중심좌표
-	    level: 10 // 지도의 확대 레벨
+	    center: new kakao.maps.LatLng(33.3580, 126.57000), // 지도의 중심좌표
+	    level: 9 // 지도의 확대 레벨
 	};
 	
 	window.onresize = function(event){ // 윈도우 크기 size 변경되면 
