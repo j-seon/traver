@@ -21,8 +21,10 @@ request.setCharacterEncoding("utf-8");
 	vertical-align: middle;
 }
 .quest { 
-	margin: 110px 48px 0px -40px;
+	margin: 110px 48px 0px 0px;
 	float: right;
+	right: 150px;
+	position: relative;
 }
 .bold { font-size: 25px; font-weight: bold; }
 .asw { font-size: 18px;  cursor: pointer; }
