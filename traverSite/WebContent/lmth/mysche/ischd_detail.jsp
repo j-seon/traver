@@ -10,7 +10,7 @@
 #title { color: #000; }
 #subtitle { font-size: 25px; font-weight: bold; margin: 0px 70px 50px 10px;}
 #dayselect { width: 100px; height: 30px; cursor: pointer; }  
-#map { border: 1px solid black; }
+#map { border: 1px solid #888; }
 
 #myschd { width: 100%; border: 1px solid #C5E0B4; margin-bottom: 70px; }
 #schd_name, #daybox, #writer { font-size: 20px; font-weight: bold; }
