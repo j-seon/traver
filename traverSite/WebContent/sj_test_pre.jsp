@@ -16,6 +16,6 @@ session.setAttribute("addPlaceList", asdf); //어레이리스트 세션에 담�
 <title>Insert title here</title>
 </head>
 <body>
-<script>location.replace('etc.jsp');</script>
+<script>location.replace('sj_test.jsp');</script>
 </body>
 </html>
