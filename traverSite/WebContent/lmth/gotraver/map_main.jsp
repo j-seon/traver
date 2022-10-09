@@ -5,10 +5,19 @@
 request.setCharacterEncoding("utf-8");
 ArrayList<PlaceInfo> placeList = (ArrayList<PlaceInfo>)request.getAttribute("placeList");
 String placeCategory = request.getParameter("placeCategory");
-
+String searchKeyword = request.getParameter("searchKeyword");
+boolean isHaveKeyword = false;
 boolean isHaveLodging = false; // 숙소 존재여부
 boolean isHaveRestaurant = false; // 음식점 존재여부
 boolean isHaveTourist = false; // 관광지 존재여부
+
+if (searchKeyword == null) {
+	searchKeyword = "";
+}
+
+
+if (searchKeyword == null || searchKeyword.equals("")) isHaveKeyword = true; // 검색어가 있다면
+
 
 for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 	PlaceInfo pi = placeList.get(i);
@@ -39,13 +48,14 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 <script type="text/javascript" src="/traverSite/file/js/map_main_calendar.js" ></script>
 </head>
 <body>
+<form action="#">
 <%@ include file="../../cni/header.jsp" %>
 <!-- 좌측 사이드박스 -->
 <% if (isLogin) { 
 ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("addPlaceList");
 
 %>
-<form action="#">
+
 <div class="left-side open">
 	<div class="schedule-info">
 		<span class="schedule_day_num">Day N</span>
@@ -68,7 +78,7 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 		<input type="button" class="schedule__all_del" value="전체 삭제" onclick="scheAllDel()"/>
 	</div>
 	<div>
-		<button class="side__open left_open"><img src="../../file/img/open.png" class="side__open_img"></button>
+		<button type="button"  class="side__open left_open"><img src="../../file/img/open.png" class="side__open_img"></button>
 	</div>
 </div>
 <!-- //좌측 사이드 박스 -->
@@ -79,16 +89,20 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 <div class="right-side open">
 	<div class="right-side_header">
 		<div class="search-box">
-			<input type="text" class="search__txt" placeholder="검색어를 입력하세요" onkeyup="enterkey(this.value)"/>
-			<button class="schedule__del search__del" value="X" onclick="schDel()">X</button>
+			<input type="text" class="search__txt" name="searchKeyword" placeholder="검색어를 입력하세요" onkeyup="enterkey(this.value)" value="<%=searchKeyword %>"/>
+			<button type="button"  class="schedule__del search__del" value="X" onclick="schDel()">X</button>
 		</div>
 		<div class="ctgr-box">
 		<!-- 검색 시, 보여줘야 할 00 개수 여부에따라 버튼 활성화/비활성화 -->
 		<!-- js를 통해 버튼에 선택에 따라 btnSelect클래스 생성/삭제, select 클래스가있으면 배경색상변경 -->
 		<!-- 검색값 여부에  따라 btnNone 클래스 생성/삭제, btnNone 클래스가 있으면 버튼 비활성화 (=onclick 이벤트 삭제) -->
-			<button name="placeCategory" value="1" class="ctgr btnSelect" onclick="placeCategoryChange(this.value)">숙소</button>
-			<button name="placeCategory" value="2" class="ctgr" onclick="placeCategoryChange(this.value)">음식점</button>
-			<button name="placeCategory" value="3" class="ctgr btnNone" onclick="placeCategoryChange(this.value)">관광지</button>
+			<button name="placeCategory" value="0" class="display_none" onclick="placeCategoryChange(this.value)">전체</button>
+			<button name="placeCategory" value="1" class="ctgr" onclick="placeCategoryChange(this.value)"
+			<% if (!isHaveLodging && !isHaveKeyword)  { %> disabled <% } %>>숙소</button>
+			<button name="placeCategory" value="2" class="ctgr" onclick="placeCategoryChange(this.value)"
+			<% if (!isHaveRestaurant && !isHaveKeyword)  { %> disabled <% } %>>음식점</button>
+			<button name="placeCategory" value="3" class="ctgr" onclick="placeCategoryChange(this.value)"
+			<% if (!isHaveTourist && !isHaveKeyword)  { %> disabled <% } %>>관광지</button>
 		</div>
 	</div>
 	<div class="place-area">
@@ -211,8 +225,8 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 <div class="main">
 	<div class="main-top_area">
 		<div class="schedule_date">
-			 <input type="date" class="" id="sdate" name="sdate" onchange="removeDa();">~
-			 <input type="date" id="edate" name="edate" disabled onchange="limitDate(); setDay(this.form.sdate.value, this.value, this.form.schedule_day);">
+			 <input type="date" class="" id="sdate" name="sdate" onchange="limitDate();">~
+			 <input type="date" id="edate" name="edate" disabled onchange="setDay(this.form.sdate.value, this.value, this.form.schedule_day);">
 		</div>
 		<div class="">
 			<select name="schedule_day" class="schedule_day">
