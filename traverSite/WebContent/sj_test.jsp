@@ -108,6 +108,7 @@
 			<button value="abcd" class="place__add" onclick="addPlace(this)">추가</button>
 		</div>
 	</div>
-
+	
+	<h2>안녕하세요 브런치 업로드 잘 기억이안나서 테스트를위해 만들었습니다.</h2>
 </body>
 </html>
