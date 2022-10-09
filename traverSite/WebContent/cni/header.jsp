@@ -18,7 +18,7 @@ if (loginInfo != null)  isLogin = true;
 		<nav class="header-gnb">
 			<ul>
 				<li>
-					<a href="placeList" class="gnb_link_menu">여행 떠나기</a>
+					<a href="/traverSite/placeList" class="gnb_link_menu">여행 떠나기</a>
 				</li>
 				<li>
 					<a href="/traverSite/lmth/mbti/mbti_start_main.jsp" class="gnb_link_menu">MBTI 여행</a>

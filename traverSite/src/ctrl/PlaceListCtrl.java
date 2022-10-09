@@ -27,7 +27,7 @@ public class PlaceListCtrl extends HttpServlet {
 		if (placeCategory == null || placeCategory.equals("")) {// 선택한 카테고리의 값이 없으면 기본값은 0
 			placeCategory = "0";
 		}
-		if (searchKeyword == null || searchKeyword.equals("")) {
+		if (searchKeyword == null || searchKeyword.equals("")) { // 입력한 키워드가 없으면 기본값은 "" 
 			searchKeyword = "";
 		}
 

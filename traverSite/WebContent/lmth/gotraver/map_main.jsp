@@ -6,9 +6,9 @@ request.setCharacterEncoding("utf-8");
 ArrayList<PlaceInfo> placeList = (ArrayList<PlaceInfo>)request.getAttribute("placeList");
 String placeCategory = request.getParameter("placeCategory");
 
-boolean isHaveLodging = false;
-boolean isHaveRestaurant = false;
-boolean isHaveTourist = false;
+boolean isHaveLodging = false; // 숙소 존재여부
+boolean isHaveRestaurant = false; // 음식점 존재여부
+boolean isHaveTourist = false; // 관광지 존재여부
 
 for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 	PlaceInfo pi = placeList.get(i);
@@ -21,19 +21,19 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 	}
 }
 
-
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>  
+<title>여행 떠나기</title>  
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
 <link rel="stylesheet" type="text/css" href="/traverSite/file/css/gotraver_main.css" >
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript" src="/traverSite/file/jq/map_main_move.js" ></script>
+<script type="text/javascript" src="/traverSite/file/jq/map_main_view.js" ></script>
 <script type="text/javascript" src="/traverSite/file/jq/map_main_add_place.js" ></script>
 <script type="text/javascript" src="/traverSite/file/js/map_main_move.js" ></script>
 <script type="text/javascript" src="/traverSite/file/js/map_main_calendar.js" ></script>
@@ -41,6 +41,10 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 <body>
 <%@ include file="../../cni/header.jsp" %>
 <!-- 좌측 사이드박스 -->
+<% if (isLogin) { 
+ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("addPlaceList");
+
+%>
 <form action="#">
 <div class="left-side open">
 	<div class="schedule-info">
@@ -49,14 +53,15 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 	</div>
 	<div class="schedule-area">
 		<ul class="schedule-list sortable">
-			<li class="schedule ui-state-default">제주호텔
+		<%
+		for (int i = 0; i < addPlaceList.size(); i ++) {	
+			PlaceInfo pi = addPlaceList.get(i);
+		%>
+			<li class="schedule ui-state-default"><%= pi.getPi_name() %>
 				<button type="button" class="schedule__del float_r" value="X" onclick="scheDel()">X</button>
-				<input type="hidden" />
+				<input type="hidden" data-id="<%= pi.getPi_id() %>"/>
 			</li>
-			<li class="schedule ui-state-default">제주음식점
-				<button type="button" class="schedule__del float_r" value="X" onclick="scheDel()">X</button>
-				<input type="hidden" />
-			</li>
+		<% } %>
 		</ul>
 	</div>
 	<div class="schedule-del_box">
@@ -67,8 +72,7 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 	</div>
 </div>
 <!-- //좌측 사이드 박스 -->
-
-
+<% } %>
  
 
 <!-- 우측 사이드 박스 -->
@@ -108,8 +112,8 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 						<div class="place__title"><%=pi.getPi_name() %></div>
 						<div class="place__option-box">
 							<button class="place__option place__info">정보</button>
-							<button class="place__option place__add">추가</button>
 							<button class="place__option place__review">리뷰</button>
+							<button class="place__option place__add" value="<%=pi.getPi_id()%>">추가</button>
 							<button class="place__option place__love">찜</button>
 						</div>
 					</div>
@@ -142,9 +146,11 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 						<div class="place__title"><%=pi.getPi_name() %></div>
 						<div class="place__option-box">
 							<button class="place__option place__info">정보</button>
-							<button class="place__option place__add">추가</button>
 							<button class="place__option place__review">리뷰</button>
+						<% if (isLogin) { %>
+							<button class="place__option place__add">추가</button>
 							<button class="place__option place__love">찜</button>
+						<% } %>
 						</div>
 					</div>
 				</div>
@@ -176,9 +182,11 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 						<div class="place__title"><%=pi.getPi_name() %></div>
 						<div class="place__option-box">
 							<button class="place__option place__info">정보</button>
-							<button class="place__option place__add">추가</button>
 							<button class="place__option place__review">리뷰</button>
+						<% if (isLogin) { %>
+							<button class="place__option place__add">추가</button>
 							<button class="place__option place__love">찜</button>
+						<% } %>
 						</div>
 					</div>
 				</div>
@@ -198,6 +206,7 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 
 
 
+<% if (isLogin) { %>
 <!-- 컨테이너 -->
 <div class="main">
 	<div class="main-top_area">
@@ -292,6 +301,7 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 </div>
 </form>
 <!-- //컨테이너 -->
+<% } %>
 
 
 <%@ include file="place_review.jsp" %>
