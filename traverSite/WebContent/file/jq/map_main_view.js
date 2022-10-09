@@ -1,5 +1,12 @@
 // 일정 보기관련 스크립트
 
+function enterkey(searchKeyword) {
+	if (window.event.keyCode == 13) {
+		alert(searchKeyword);
+		placeSearchChange(searchKeyword);
+    }
+}
+
 function placeCategoryChange(placeCategory) {
 // 카테고리 변경
 	$.ajax({
