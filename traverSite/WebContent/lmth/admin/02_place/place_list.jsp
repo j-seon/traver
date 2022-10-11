@@ -27,6 +27,23 @@ args = "&cpage=" + cpage + schargs;
 <link href="/traverSite/lmth/admin/file/css/style.css" type="text/css" rel="stylesheet">
 <script src="/traverSite/lmth/admin/file/js/jquery-3.6.1.js"></script>
 <script>
+function adminPlaceDel(piid) {
+	// 장바구니 내의 특정 상품을 삭제하는 함수
+		if (confirm("정말 삭제하시겠습니까?")) {
+			$.ajax({
+				type : "POST", 
+				url : "/traverSite/adminPlaceProcDel", 
+				data : {"piid" : piid}, 
+				success : function(chkRs) {
+					if (chkRs == 0) {
+						alert("장소 삭제에 실패했습니다.\n다시 시도하세요.");
+					}
+					location.reload();
+				}
+			});
+		}
+	}
+
 $(document).ready(function() {
 	$("#chkAll").click(function() {
 		if($("#chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
@@ -41,8 +58,6 @@ $(document).ready(function() {
 		else $("#chkAll").prop("checked", true); 
 	});
 });
-
-
 </script>
 </head>
 <body>
@@ -67,7 +82,16 @@ $(document).ready(function() {
 				<form action="placeFormIn" name="frm_place_svc" method="post">
 					<ul>
 						<li><span class="count">총 장소 : <span class="place_num"><%=rcnt %></span></span></li>
-						<li><input type="button" value="장소 삭제" id="placeDel" onclick="location.href='placeProcDel'"></li>
+						<%
+						if (placeInfo.size() > 0) {
+							for (int i = 0; i < placeInfo.size(); i ++){
+								PlaceInfo pi_id = placeInfo.get(i);
+								String piid = pi_id.getPi_id();
+							
+						
+						%>
+						<li><input type="button" value="장소 삭제" id="placeDel" onclick="adminPlaceDel(<%=piid %>)"></li>
+						<% }} %>
 						<li><input type="button" value="장소 추가" id="placeIn" onclick="location.href='/traverSite/lmth/admin/02_place/place_form_in.jsp';"></li>
 					</ul>
 				</form>
@@ -91,23 +115,23 @@ $(document).ready(function() {
 					<%
 					if (placeInfo.size() > 0) {	
 						for (int i = 0; i < placeInfo.size(); i++) {
-							PlaceInfo pl = placeInfo.get(i);
+							PlaceInfo pi = placeInfo.get(i);
 								%>
 								<tr align="center">
-									<td><input type="checkbox" name="chk" value="<%=pl.getPi_id() %>"></td>
-									<td><%=pl.getPi_name() %></td>
-									<td><%=pl.getPi_phone() %></td>
+									<td><input type="checkbox" name="chk" value="<%=pi.getPi_id() %>"></td>
+									<td><%=pi.getPi_name() %></td>
+									<td><%=pi.getPi_phone() %></td>
 									<td>
-									<% if (pl.getPi_ctgr().equals("1")){ %>
+									<% if (pi.getPi_ctgr().equals("1")){ %>
 									호텔
-									<% } else if (pl.getPi_ctgr().equals("2")) { %>
+									<% } else if (pi.getPi_ctgr().equals("2")) { %>
 									음식점
 									<% } else {%>
 									관광지
 									<% } %>
 									</td>
-									<td><%=pl.getPi_date() %></td>
-									<td><%=pl.getPi_addr1() %></td>
+									<td><%=pi.getPi_date() %></td>
+									<td><%=pi.getPi_addr1() %></td>
 									<td><input type="button" value="수정" onclick="location.href='#'"></td>
 								</tr>
 								<%

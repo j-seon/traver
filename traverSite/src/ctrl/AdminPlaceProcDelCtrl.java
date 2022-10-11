@@ -17,6 +17,8 @@ public class AdminPlaceProcDelCtrl extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    request.setCharacterEncoding("utf-8");
+	    String piid = request.getParameter("piid");
+	    
 	    
 	}
 }
