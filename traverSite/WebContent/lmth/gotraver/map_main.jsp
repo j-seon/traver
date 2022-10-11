@@ -6,7 +6,6 @@ request.setCharacterEncoding("utf-8");
 ArrayList<PlaceInfo> placeList = (ArrayList<PlaceInfo>)request.getAttribute("placeList");
 String placeCategory = request.getParameter("placeCategory");
 String searchKeyword = request.getParameter("searchKeyword");
-boolean isHaveKeyword = false;
 boolean isHaveLodging = false; // 숙소 존재여부
 boolean isHaveRestaurant = false; // 음식점 존재여부
 boolean isHaveTourist = false; // 관광지 존재여부
@@ -14,9 +13,6 @@ boolean isHaveTourist = false; // 관광지 존재여부
 if (searchKeyword == null) {
 	searchKeyword = "";
 }
-
-
-if (searchKeyword == null || searchKeyword.equals("")) isHaveKeyword = true; // 검색어가 있다면
 
 
 for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
@@ -96,22 +92,19 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 		<!-- 검색 시, 보여줘야 할 00 개수 여부에따라 버튼 활성화/비활성화 -->
 		<!-- js를 통해 버튼에 선택에 따라 btnSelect클래스 생성/삭제, select 클래스가있으면 배경색상변경 -->
 		<!-- 검색값 여부에  따라 btnNone 클래스 생성/삭제, btnNone 클래스가 있으면 버튼 비활성화 (=onclick 이벤트 삭제) -->
-			<button name="placeCategory" value="0" class="display_none" onclick="placeCategoryChange(this.value)">전체</button>
-			<button name="placeCategory" value="1" class="ctgr" onclick="placeCategoryChange(this.value)"
-			<% if (!isHaveLodging && !isHaveKeyword)  { %> disabled <% } %>>숙소</button>
-			<button name="placeCategory" value="2" class="ctgr" onclick="placeCategoryChange(this.value)"
-			<% if (!isHaveRestaurant && !isHaveKeyword)  { %> disabled <% } %>>음식점</button>
-			<button name="placeCategory" value="3" class="ctgr" onclick="placeCategoryChange(this.value)"
-			<% if (!isHaveTourist && !isHaveKeyword)  { %> disabled <% } %>>관광지</button>
+	<button name="placeCategory" value="0" class="display_none" onclick="placeCategoryChange(this.value)">전체</button>
+	<button name="placeCategory" value="1" class="ctgr" onclick="placeCategoryChange(this.value)">숙소</button>
+	<button name="placeCategory" value="2" class="ctgr" onclick="placeCategoryChange(this.value)">음식점</button>
+	<button name="placeCategory" value="3" class="ctgr" onclick="placeCategoryChange(this.value)">관광지</button>
 		</div>
 	</div>
 	<div class="place-area">
 	<% if (isHaveLodging) { %>
 		<!-- 숙소 -->
 		<div class="place-section">
-		<% //if (카테고리 분류가 전체보기면)%>
+		<% if (placeCategory == null || placeCategory == "0") { %>
 			<div class="place-section__title">숙소</div>
-		<% //} %>
+		<% } %>
 			<div class="place-list">
 		<% 
 		for(int i = 0; i < placeList.size() ; i ++) { 
@@ -143,9 +136,9 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveRestaurant) {  %>
 		<!-- 음식점 -->
 		<div class="place-section">
-		<% //if (카테고리 분류가 전체보기면)%>
+		<% if (placeCategory == null || placeCategory == "0") { %>
 			<div class="place-section__title">음식점</div>
-		<% //} %>
+		<% } %>
 			<div class="place-list">
 		<% 
 		for(int i = 0; i < placeList.size() ; i ++) { 
@@ -179,9 +172,9 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveTourist) {  %>
 		<!-- 관광지 -->
 		<div class="place-section">
-		<% //if (카테고리 분류가 전체보기면)%>
+		<% if (placeCategory == null || placeCategory == "0") { %>
 			<div class="place-section__title">관광지</div>
-		<% //} %>
+		<% } %>
 			<div class="place-list">
 		<% 
 		for(int i = 0; i < placeList.size() ; i ++) { 
@@ -229,7 +222,7 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 			 <input type="date" id="edate" name="edate" disabled onchange="setDay(this.form.sdate.value, this.value, this.form.schedule_day);">
 		</div>
 		<div class="">
-			<select name="schedule_day" class="schedule_day">
+			<select name="schedule_day" class="schedule_day" onchange="getDate(this.value, this.form.sdate.value);">
 				<option value="" class="schedule_day1">일차 선택</option>
 			</select>
 			<select name="schedule_group" class="schedule_group" id="">
@@ -336,34 +329,63 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 <!-- services와 카카오지도 라이브러리 불러오기 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b05cef42f58551f118588eb3f26ff67&libraries=services"></script>
 <script>
-	var mapContainer = document.getElementById('map'),  // 지도를 표시할 div 
-	mapOption = { 
-	    center: new kakao.maps.LatLng(33.3580, 126.57000), // 지도의 중심좌표
-	    level: 9 // 지도의 확대 레벨
-	};
-	
-	window.onresize = function(event){ // 윈도우 크기 size 변경되면 
+var mapContainer = document.getElementById('map'),  // 지도를 표시할 div 
+mapOption = { 
+    center: new kakao.maps.LatLng(33.4080, 126.60000), // 지도의 중심좌표
+    level: 10 // 지도의 확대 레벨
+};
+
+window.onresize = function(event){ // 윈도우 크기 size 변경되면 
 	var latlng = map.getCenter(); 
 	var mainPoint = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng()); // 중심위치 받아와서
 	map.relayout();
 	map.setCenter(mainPoint); // 윈도우 크기에 맞춰 중심위치 변경
 	}
+
+var map = new daum.maps.Map(mapContainer, mapOption); // 지도 생성
 	
-	var map = new daum.maps.Map(mapContainer, mapOption); 
-	
-	<% 
-	for (int i = 0; i < placeList.size(); i++ ) {
+<%
+for (int i = 0; i < placeList.size(); i++ ) {
 	PlaceInfo pi = placeList.get(i);
-	%>
-	var position<%=pi.getPi_id()%> = new kakao.maps.LatLng<%=pi.getPi_coords()%>;
-	
-	var marker = new kakao.maps.Marker({
-	    position: position<%=pi.getPi_id()%>
+%>
+	var position<%=pi.getPi_id()%> = ({	// 마커의 윈도우인포에 장소 이름과 위치를 저장
+		 content: "<div style='display:inline-block; margin:5px 0 5px 5px;'><%=pi.getPi_name()%></div>", 
+	     latlng: new kakao.maps.LatLng<%=pi.getPi_coords()%>
 	});
-	marker.setMap(map);
 	
-	
-	<% } %>
+    var marker = new kakao.maps.Marker({ // 마커를 생성
+        map: map, // 마커를 표시할 지도
+        position: position<%=pi.getPi_id()%>.latlng 
+    });
+    
+    var infowindow = new kakao.maps.InfoWindow({ // 마커에 표시할 툴팁 생성
+        content: position<%=pi.getPi_id()%>.content 
+    });
+    
+    var listBoxes = document.querySelector('.place');
+    
+    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow, listBoxes));
+    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+
+<% } %>
+
+//인포윈도우(툴팁)를 표시하는 클로저를 만드는 함수
+function makeOverListener(map, marker, infowindow, listBoxes) {
+    return function() {
+        infowindow.open(map, marker, listBoxes);
+        listBoxes.style.background = '#eff7ff';
+
+    };
+}
+
+// 인포윈도우(툴팁)를 닫는 클로저를 만드는 함수
+function makeOutListener(infowindow) {
+    return function() {
+        infowindow.close();
+        listBoxes.style.background = 'none'; 
+
+    };
+}
 </script>
 </body>
 </html>
