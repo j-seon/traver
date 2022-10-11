@@ -218,11 +218,11 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 <div class="main">
 	<div class="main-top_area">
 		<div class="schedule_date">
-			 <input type="date" class="" id="sdate" name="sdate" onchange="limitDate();">~
+			 <input type="date" class="" id="sdate" name="sdate" onchange="limitDate(); setDay(this.value, this.form.edate.value, this.form.schedule_day);">~
 			 <input type="date" id="edate" name="edate" disabled onchange="setDay(this.form.sdate.value, this.value, this.form.schedule_day);">
 		</div>
 		<div class="">
-			<select name="schedule_day" class="schedule_day" onchange="getDate(this.value, this.form.sdate.value);">
+			<select id="schedule_day" name="schedule_day" class="schedule_day" onchange="getDate(this.value, this.form.sdate.value);">
 				<option value="" class="schedule_day1">일차 선택</option>
 			</select>
 			<select name="schedule_group" class="schedule_group" id="">
