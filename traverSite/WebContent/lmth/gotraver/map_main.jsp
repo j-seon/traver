@@ -331,8 +331,8 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 <script>
 var mapContainer = document.getElementById('map'),  // 지도를 표시할 div 
 mapOption = { 
-    center: new kakao.maps.LatLng(33.4080, 126.60000), // 지도의 중심좌표
-    level: 10 // 지도의 확대 레벨
+	center: new kakao.maps.LatLng(33.3580, 126.57000), // 지도의 중심좌표
+    level: 9 // 지도의 확대 레벨
 };
 
 window.onresize = function(event){ // 윈도우 크기 size 변경되면 

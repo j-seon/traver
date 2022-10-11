@@ -4,11 +4,6 @@
 <%
 request.setCharacterEncoding("utf-8");
 
-LocalDate today = LocalDate.now();
-int cyear = today.getYear();
-int cmon = today.getMonthValue();
-int cday = today.getDayOfMonth();
-int last = today.lengthOfMonth();
 
 String[] arrDomain = {"naver.com", "nate.com", "gmail.com", "daum.net", "yahoo.com"};
 %>
@@ -24,7 +19,8 @@ String[] arrDomain = {"naver.com", "nate.com", "gmail.com", "daum.net", "yahoo.c
 .joinForm_box {  
     width:700px; height:800px; 
     border:solid 1px black; background-color:#fafcfc;
-    position:absolute; top:130px; left:250px;  
+    position:absolute; top:130px; left:250px;
+    padding-bottom:20px;  
 }
 .main_title { 
     font-size:25px; font-weight:bold;
@@ -47,6 +43,7 @@ String[] arrDomain = {"naver.com", "nate.com", "gmail.com", "daum.net", "yahoo.c
 #mi_pw2 { margin-left:95px; }
 #mi_name { margin-left:50px; }
 #mi_nickname { margin-left:35px; }
+#mi_birth { height:30px; width:200px;}
 #birthbox_select { margin-left:20px; }
 #emailbox_select { margin-left:35px; }
 
@@ -62,8 +59,7 @@ String[] arrDomain = {"naver.com", "nate.com", "gmail.com", "daum.net", "yahoo.c
 #fontRed { font-weight:bold; color:red; }
 .btnChk { height:36px; }
 </style>
-<script src="/traverSite/file/js/date_change.js"></script>
-<script src="/traverSite/file/js/jquery-3.6.1.js"></script>
+<script src="/traverSite/file/jq/jquery-3.6.1.js"></script>
 <script>
 $(document).ready(function() {
     $("#e2").change(function() {
@@ -149,31 +145,7 @@ function chkDupId(uid) {    // id중복체크 등 다 이걸로!
 		    <div class="birthbox_group">
 		    	<span class="asterik">*</span><span class="title">생년월일</span>
 			    <span id="birthbox_select">
-				    <select name="by" onchange="resetday(this.value, this.form.bm.value, this.form.bd);"
-				    style="width:70px;height:36px;">
-				    <% for (int i = 1930 ; i <= cyear ; i++) { %>
-				        <option value="<%=i %>" <% if (i == cyear) { %>selected="selected"<% } %>><%=i %></option>
-				    <% } %>
-				    </select>년
-				    <select name="bm" onchange="resetday(this.form.by.value, this.value, this.form.bd);"
-				    style="width:70px;height:36px;">
-				    <% 
-				    for (int i = 1 ; i <= 12 ; i++) { 
-				    	  String bm = i + "";
-				    	  if (i < 10) bm = "0" + i;
-				    %>
-				        <option value="<%=bm %>" <% if (i == cmon) { %>selected="selected"<% } %>><%=bm %></option>
-				      <% } %>
-				    </select>월
-				    <select name="bd" style="width:70px;height:36px;">
-				    <% 
-				    for (int i = 1 ; i <= last ; i++) { 
-				    	  String bd = i + "";
-				    	  if (i < 10) bd = "0" + i;
-				    %>
-				        <option value="<%=bd %>" <% if (i == cday) { %>selected="selected"<% } %>><%=bd %></option>
-				    <% } %>
-				    </select>일
+				    <input type="date" name="mi_birth" required="required" id="mi_birth" >
 			    </span>
 		    </div><br />
 		    
@@ -192,7 +164,8 @@ function chkDupId(uid) {    // id중복체크 등 다 이걸로!
 				    <input type="text" name="e3" id="e3" size="10" style="height:30px;"/>
 				    <button onclick="emailAuthentication()" id="eamilAuthBtn" type="button" class="btnChk">이메일 확인</button><br />
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<input type="text" name="verifyNum" style="height:30px;" placeholder="이메일 본인 확인 번호" maxlength="6"/>
+					<input type="text" name="verifyNum" style="height:30px; margin-top:10px;" placeholder="이메일 본인 확인 번호" maxlength="6"
+					required="required" />
 					<span class="blind">5:00</span>
 					<input type="submit" value="확인" style="height:35px; width:60px;"/>
 			</div><br />
