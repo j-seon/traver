@@ -6,12 +6,12 @@ import java.sql.*;
 import dao.*;
 import vo.*;
 
-public class PlaceProcInSvc {
+public class AdminPlaceProcInSvc {
     public int placeInsert(String name, String phone, String link, String ctgr, String zip, String coords, String addr1,
             String addr2, String desc, String img1, String img2, String img3, String img4, String img5) {
         int result = 0;
         Connection conn = getConnection();
-        PlaceProcInDao placeProcInDao = PlaceProcInDao.getInstance();
+        AdminPlaceProcInDao placeProcInDao = AdminPlaceProcInDao.getInstance();
         placeProcInDao.setConnection(conn);
         
         result = placeProcInDao.placeInsert(name, phone, link, ctgr, zip, coords, addr1, addr2, desc, img1, img2, img3, img4, img5);

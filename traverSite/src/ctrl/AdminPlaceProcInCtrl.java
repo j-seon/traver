@@ -8,10 +8,10 @@ import svc.*;
 import vo.*;
 
 @WebServlet("/placeProcIn")
-public class PlaceProcInCtrl extends HttpServlet {
+public class AdminPlaceProcInCtrl extends HttpServlet {
     private static final long serialVersionUID = 1L;
        
-    public PlaceProcInCtrl() {
+    public AdminPlaceProcInCtrl() {
         super();
     }
 
@@ -37,7 +37,7 @@ public class PlaceProcInCtrl extends HttpServlet {
         String img5 = request.getParameter("file_path4");
         
         
-        PlaceProcInSvc placeProcInSvc = new PlaceProcInSvc();
+        AdminPlaceProcInSvc placeProcInSvc = new AdminPlaceProcInSvc();
         int result = placeProcInSvc.placeInsert(name, phone, link, ctgr, zip, coords,
                 addr1, addr2, desc, img1, img2, img3, img4, img5);
         
