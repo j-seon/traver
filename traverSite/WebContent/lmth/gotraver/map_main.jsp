@@ -102,7 +102,7 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveLodging) { %>
 		<!-- 숙소 -->
 		<div class="place-section">
-		<% if (placeCategory == null || placeCategory == "0") { %>
+		<% if (placeCategory == null || placeCategory.equals("0")) { %>
 			<div class="place-section__title">숙소</div>
 		<% } %>
 			<div class="place-list">
@@ -136,7 +136,7 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveRestaurant) {  %>
 		<!-- 음식점 -->
 		<div class="place-section">
-		<% if (placeCategory == null || placeCategory == "0") { %>
+		<% if (placeCategory == null || placeCategory.equals("0")) { %>
 			<div class="place-section__title">음식점</div>
 		<% } %>
 			<div class="place-list">
@@ -172,7 +172,7 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveTourist) {  %>
 		<!-- 관광지 -->
 		<div class="place-section">
-		<% if (placeCategory == null || placeCategory == "0") { %>
+		<% if (placeCategory == null || placeCategory.equals("0")) { %>
 			<div class="place-section__title">관광지</div>
 		<% } %>
 			<div class="place-list">
