@@ -132,7 +132,7 @@ function checkSize(input) {
 
 <body>
    <%@ include file="../cni/header.jsp"%>
-
+   
    <div class="place_02_contents">
       <div class="container">
          <div class="place_02_h2">
@@ -200,7 +200,7 @@ function checkSize(input) {
                            <input class="upload-name" value="파일선택" disabled="disabled">
                            <label for="ex_filename_01">업로드</label>
                            <input type="file" id="ex_filename_01" name="file_path" class="upload-hidden" onchange="checkSize(this)">
-                           <!-- <input type="button" value="추가" class="file_in_sel" id="button-add-file">  -->
+                           <input type="button" value="추가" class="file_in_sel" id="button-add-file">
                         </div>
                         <div class="filebox" style="margin-bottom: 10px;">
                            <input class="upload-name" value="파일선택" disabled="disabled">
