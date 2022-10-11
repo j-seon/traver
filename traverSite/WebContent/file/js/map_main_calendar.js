@@ -38,4 +38,17 @@
 		}
 	}
 	
+	function getDate(day, sdate) {
+	      
+		var arr1 = sdate.split('-');               
+		var dat1 = new Date(arr1[0], arr1[1] - 1, arr1[2]);
+		var dat2 = new Date(dat1.setDate((dat1.getDate()) + (day - 1)));
+		  
+		var fullEDate = dat2.toLocaleString().substring(0,12).replaceAll(". ","-").replace(".","");
+		var date = fullEDate.substring(8);
+		if ( date < 10 ) { date = "0" + date; }
+		  
+		return fullEDate.substring(0,8) + date;
+	}
+
 	
