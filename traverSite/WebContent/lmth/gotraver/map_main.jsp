@@ -336,34 +336,63 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 <!-- services와 카카오지도 라이브러리 불러오기 -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=2b05cef42f58551f118588eb3f26ff67&libraries=services"></script>
 <script>
-	var mapContainer = document.getElementById('map'),  // 지도를 표시할 div 
-	mapOption = { 
-	    center: new kakao.maps.LatLng(33.3580, 126.57000), // 지도의 중심좌표
-	    level: 9 // 지도의 확대 레벨
-	};
-	
-	window.onresize = function(event){ // 윈도우 크기 size 변경되면 
+var mapContainer = document.getElementById('map'),  // 지도를 표시할 div 
+mapOption = { 
+    center: new kakao.maps.LatLng(33.4080, 126.60000), // 지도의 중심좌표
+    level: 10 // 지도의 확대 레벨
+};
+
+window.onresize = function(event){ // 윈도우 크기 size 변경되면 
 	var latlng = map.getCenter(); 
 	var mainPoint = new kakao.maps.LatLng(latlng.getLat(), latlng.getLng()); // 중심위치 받아와서
 	map.relayout();
 	map.setCenter(mainPoint); // 윈도우 크기에 맞춰 중심위치 변경
 	}
+
+var map = new daum.maps.Map(mapContainer, mapOption); // 지도 생성
 	
-	var map = new daum.maps.Map(mapContainer, mapOption); 
-	
-	<% 
-	for (int i = 0; i < placeList.size(); i++ ) {
+<%
+for (int i = 0; i < placeList.size(); i++ ) {
 	PlaceInfo pi = placeList.get(i);
-	%>
-	var position<%=pi.getPi_id()%> = new kakao.maps.LatLng<%=pi.getPi_coords()%>;
-	
-	var marker = new kakao.maps.Marker({
-	    position: position<%=pi.getPi_id()%>
+%>
+	var position<%=pi.getPi_id()%> = ({	// 마커의 윈도우인포에 장소 이름과 위치를 저장
+		 content: "<div style='display:inline-block; margin:5px 0 5px 5px;'><%=pi.getPi_name()%></div>", 
+	     latlng: new kakao.maps.LatLng<%=pi.getPi_coords()%>
 	});
-	marker.setMap(map);
 	
-	
-	<% } %>
+    var marker = new kakao.maps.Marker({ // 마커를 생성
+        map: map, // 마커를 표시할 지도
+        position: position<%=pi.getPi_id()%>.latlng 
+    });
+    
+    var infowindow = new kakao.maps.InfoWindow({ // 마커에 표시할 툴팁 생성
+        content: position<%=pi.getPi_id()%>.content 
+    });
+    
+    var listBoxes = document.querySelector('.place');
+    
+    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow, listBoxes));
+    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+
+<% } %>
+
+//인포윈도우(툴팁)를 표시하는 클로저를 만드는 함수
+function makeOverListener(map, marker, infowindow, listBoxes) {
+    return function() {
+        infowindow.open(map, marker, listBoxes);
+        listBoxes.style.background = '#eff7ff';
+
+    };
+}
+
+// 인포윈도우(툴팁)를 닫는 클로저를 만드는 함수
+function makeOutListener(infowindow) {
+    return function() {
+        infowindow.close();
+        listBoxes.style.background = 'none'; 
+
+    };
+}
 </script>
 </body>
 </html>
