@@ -135,7 +135,7 @@ function checkSize(input) {
          <div class="place_02_h2">
             <h2>장소 등록</h2>
          </div>
-         <form name="frm_place_in" action="/traverSite/placeProcIn" method="post">
+         <form name="frm_place_in" action="/traverSite/adminPlaceProcIn" method="post">
             <div class="place_02_tab01">
                <h3>장소 기본 정보</h3>
                <table>

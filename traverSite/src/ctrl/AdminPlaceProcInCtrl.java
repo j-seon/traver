@@ -7,7 +7,7 @@ import javax.servlet.http.*;
 import svc.*;
 import vo.*;
 
-@WebServlet("/placeProcIn")
+@WebServlet("/adminPlaceProcIn")
 public class AdminPlaceProcInCtrl extends HttpServlet {
     private static final long serialVersionUID = 1L;
        
@@ -40,11 +40,6 @@ public class AdminPlaceProcInCtrl extends HttpServlet {
         AdminPlaceProcInSvc placeProcInSvc = new AdminPlaceProcInSvc();
         int result = placeProcInSvc.placeInsert(name, phone, link, ctgr, zip, coords,
                 addr1, addr2, desc, img1, img2, img3, img4, img5);
-        
-        /*
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/lmth/admin/02_place/place_list.jsp");
-        dispatcher.forward(request, response);
-        */
         
         
         if (result > 0) {
