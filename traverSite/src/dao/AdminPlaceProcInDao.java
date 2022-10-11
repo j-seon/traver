@@ -5,14 +5,14 @@ import java.util.*;
 import java.sql.*;
 import vo.*;
 
-public class PlaceProcInDao {
-    private static PlaceProcInDao placeProcInDao; 
+public class AdminPlaceProcInDao {
+    private static AdminPlaceProcInDao placeProcInDao; 
     private Connection conn;
-    private PlaceProcInDao() {}
+    private AdminPlaceProcInDao() {}
     
-    public static PlaceProcInDao getInstance() {
+    public static AdminPlaceProcInDao getInstance() {
         if (placeProcInDao == null) {
-            placeProcInDao = new PlaceProcInDao();
+            placeProcInDao = new AdminPlaceProcInDao();
         }
         return placeProcInDao;
     }

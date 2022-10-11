@@ -8,10 +8,10 @@ import svc.*;
 import vo.*;
 
 @WebServlet("/placeFormIn")
-public class PlaceFormInCtrl extends HttpServlet {
+public class AdminPlaceFormInCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public PlaceFormInCtrl() {
+    public AdminPlaceFormInCtrl() {
         super();
     }
 
