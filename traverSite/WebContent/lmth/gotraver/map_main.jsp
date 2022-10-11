@@ -6,7 +6,6 @@ request.setCharacterEncoding("utf-8");
 ArrayList<PlaceInfo> placeList = (ArrayList<PlaceInfo>)request.getAttribute("placeList");
 String placeCategory = request.getParameter("placeCategory");
 String searchKeyword = request.getParameter("searchKeyword");
-boolean isHaveKeyword = false;
 boolean isHaveLodging = false; // 숙소 존재여부
 boolean isHaveRestaurant = false; // 음식점 존재여부
 boolean isHaveTourist = false; // 관광지 존재여부
@@ -14,9 +13,6 @@ boolean isHaveTourist = false; // 관광지 존재여부
 if (searchKeyword == null) {
 	searchKeyword = "";
 }
-
-
-if (searchKeyword == null || searchKeyword.equals("")) isHaveKeyword = true; // 검색어가 있다면
 
 
 for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
@@ -96,22 +92,19 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 		<!-- 검색 시, 보여줘야 할 00 개수 여부에따라 버튼 활성화/비활성화 -->
 		<!-- js를 통해 버튼에 선택에 따라 btnSelect클래스 생성/삭제, select 클래스가있으면 배경색상변경 -->
 		<!-- 검색값 여부에  따라 btnNone 클래스 생성/삭제, btnNone 클래스가 있으면 버튼 비활성화 (=onclick 이벤트 삭제) -->
-			<button name="placeCategory" value="0" class="display_none" onclick="placeCategoryChange(this.value)">전체</button>
-			<button name="placeCategory" value="1" class="ctgr" onclick="placeCategoryChange(this.value)"
-			<% if (!isHaveLodging && !isHaveKeyword)  { %> disabled <% } %>>숙소</button>
-			<button name="placeCategory" value="2" class="ctgr" onclick="placeCategoryChange(this.value)"
-			<% if (!isHaveRestaurant && !isHaveKeyword)  { %> disabled <% } %>>음식점</button>
-			<button name="placeCategory" value="3" class="ctgr" onclick="placeCategoryChange(this.value)"
-			<% if (!isHaveTourist && !isHaveKeyword)  { %> disabled <% } %>>관광지</button>
+	<button name="placeCategory" value="0" class="display_none" onclick="placeCategoryChange(this.value)">전체</button>
+	<button name="placeCategory" value="1" class="ctgr" onclick="placeCategoryChange(this.value)">숙소</button>
+	<button name="placeCategory" value="2" class="ctgr" onclick="placeCategoryChange(this.value)">음식점</button>
+	<button name="placeCategory" value="3" class="ctgr" onclick="placeCategoryChange(this.value)">관광지</button>
 		</div>
 	</div>
 	<div class="place-area">
 	<% if (isHaveLodging) { %>
 		<!-- 숙소 -->
 		<div class="place-section">
-		<% //if (카테고리 분류가 전체보기면)%>
+		<% if (placeCategory == null || placeCategory == "0") { %>
 			<div class="place-section__title">숙소</div>
-		<% //} %>
+		<% } %>
 			<div class="place-list">
 		<% 
 		for(int i = 0; i < placeList.size() ; i ++) { 
@@ -143,9 +136,9 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveRestaurant) {  %>
 		<!-- 음식점 -->
 		<div class="place-section">
-		<% //if (카테고리 분류가 전체보기면)%>
+		<% if (placeCategory == null || placeCategory == "0") { %>
 			<div class="place-section__title">음식점</div>
-		<% //} %>
+		<% } %>
 			<div class="place-list">
 		<% 
 		for(int i = 0; i < placeList.size() ; i ++) { 
@@ -179,9 +172,9 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveTourist) {  %>
 		<!-- 관광지 -->
 		<div class="place-section">
-		<% //if (카테고리 분류가 전체보기면)%>
+		<% if (placeCategory == null || placeCategory == "0") { %>
 			<div class="place-section__title">관광지</div>
-		<% //} %>
+		<% } %>
 			<div class="place-list">
 		<% 
 		for(int i = 0; i < placeList.size() ; i ++) { 
@@ -229,7 +222,7 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 			 <input type="date" id="edate" name="edate" disabled onchange="setDay(this.form.sdate.value, this.value, this.form.schedule_day);">
 		</div>
 		<div class="">
-			<select name="schedule_day" class="schedule_day">
+			<select name="schedule_day" class="schedule_day" onchange="getDate(this.value, this.form.sdate.value);">
 				<option value="" class="schedule_day1">일차 선택</option>
 			</select>
 			<select name="schedule_group" class="schedule_group" id="">
