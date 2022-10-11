@@ -10,7 +10,7 @@ request.setCharacterEncoding("utf-8");
 <style>
 #visual {
 	height: 300px;
-	background-image: url('../../file/img/mbti_bg.png');
+	background-image: url('file/img/mbti_bg.png');
 }
 #p_vis_disc {
 	width: 1200px; height: 400px;
@@ -89,7 +89,7 @@ hr { margin: 20px 0;}
 
 .hide { opacity: 0.0; cursor: default; }
 </style>
-<script src="../../file/js/jquery-3.6.1.js"></script>
+<script src="file/jq/jquery-3.6.1.js"></script>
 <script>
 $(document).ready(function() {
 	var mbticlix = 0, popclix = 0;
@@ -137,7 +137,7 @@ $(document).ready(function() {
 <%@ include file="../../cni/header.jsp" %>
 <div id="visual">
 	<div id="p_vis_disc">
-		<img id="char_visual" src="../../file/img/mbti_char.png">	
+		<img id="char_visual" src="file/img/mbti_char.png">	
 	</div>
 </div>
 <div class="container">
@@ -163,16 +163,16 @@ $(document).ready(function() {
 	   			<option value="ENFJ">ENFJ</option>
 	   			<option value="ENFP">ENFP</option>
 	   		</select>
-	   		<a href="mbti_test.jsp"><button class="btn"><image id="retestbtn" src="../../file/img/" alt="재검사"></button></a>
+	   		<a href="mbti_test.jsp"><button class="btn"><image id="retestbtn" src="file/img/" alt="재검사"></button></a>
 	   	</div><br><br>
 	   	<hr>
 	   	<div id="mbti-rcmd">
 		   	<span class="sub_font">ISTJ 추천 일정</span>
-		   	<a href="mbti_list.jsp"><button class="btn"><image class="golistbtn" src="../../file/img/" alt="전체 일정표 보기"></button></a>
+		   	<a href="mbti_list.jsp"><button class="btn"><image class="golistbtn" src="file/img/" alt="전체 일정표 보기"></button></a>
 		   	<br>
 		   	<div class="arrowbox">
-			   	<button class="arrowbtn left hide" id="t-l-btn"><img class="arrow" src="../../file/img/left.png"></button>
-				<button class="arrowbtn" id="t-r-btn"><img class="arrow" src="../../file/img/right.png"></button>
+			   	<button class="arrowbtn left hide" id="t-l-btn"><img class="arrow" src="file/img/left.png"></button>
+				<button class="arrowbtn" id="t-r-btn"><img class="arrow" src="file/img/right.png"></button>
 			</div>
 		   	<div id="mbti-post">
 		   		<div class="hiddenbox">
@@ -280,11 +280,11 @@ $(document).ready(function() {
 	   	<br><hr>
 	   	<div id="pop-rcmd">
 		   	<span class="sub_font">인기 일정</span>
-		   	<a href="mbti_list.jsp"><button class="btn"><image class="golistbtn" src="../../file/img/" alt="전체 일정표 보기"></button></a>
+		   	<a href="mbti_list.jsp"><button class="btn"><image class="golistbtn" src="file/img/" alt="전체 일정표 보기"></button></a>
 		   	<br>
 		   	<div class="arrowbox">
-			   	<button class="arrowbtn left hide" id="b-l-btn"><img class="arrow" src="../../file/img/left.png"></button>
-				<button class="arrowbtn" id="b-r-btn"><img class="arrow" src="../../file/img/right.png"></button>
+			   	<button class="arrowbtn left hide" id="b-l-btn"><img class="arrow" src="file/img/left.png"></button>
+				<button class="arrowbtn" id="b-r-btn"><img class="arrow" src="file/img/right.png"></button>
 			</div>
 		   	<div id="pop-post">
 		   		<div class="hiddenbox">
