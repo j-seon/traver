@@ -2,7 +2,6 @@
 
 function enterkey(searchKeyword) {
 	if (window.event.keyCode == 13) {
-		alert(searchKeyword);
 		placeSearchChange(searchKeyword);
     }
 }

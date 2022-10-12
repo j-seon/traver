@@ -10,7 +10,7 @@ request.setCharacterEncoding("utf-8");
 <style>
 #visual {
 	height: 360px;
-	background-image: url('../../file/img/mbti_bg.png');
+	background-image: url('file/img/mbti_bg.png');
 }
 #p_vis_desc {
 	width: 1200px; height: 400px;
@@ -79,30 +79,30 @@ request.setCharacterEncoding("utf-8");
 			자신의 MBTI에 맞는 여행 일정 추천<br>
 			회원 간의 일정 공유 및 소통<br><br>
 			</span>
-			<a href="mbti_start_sub.jsp"><button class="btn"><image class="startbtn_img" id="startbtn1" src="../../file/img/startbtn1.png" alt="시작하기"></button></a>
+			<a href="lmth/mbti/mbti_start_sub.jsp"><button class="btn"><image class="startbtn_img" id="startbtn1" src="file/img/startbtn1.png" alt="시작하기"></button></a>
 		</div>
-		<img id="char_visual" src="../../file/img/mbti_char.png">	
+		<img id="char_visual" src="file/img/mbti_char.png">	
 	</div>
 </div>
 <div class="container">
    <div class="container-default_box">
        	<div id="desc">
       		<div class="sub_desc">
-      			<img src="../../file/img/sub_img1.png" class="sub_img">
+      			<img src="file/img/sub_img1.png" class="sub_img">
 	      		<h2 class="sub_title">나의 MBTI에 맞는 일정 추천</h2>
 	      		<p>나와 비슷한 사람들이 좋아하는 일정을 찾아 실패 없는 여행을 즐기세요!</p>
       		</div>
    			<div class="sub_desc">
-   				<img src="../../file/img/sub_img2.png" class="sub_img">
+   				<img src="file/img/sub_img2.png" class="sub_img">
    				<h2 class="sub_title">다양한 일정표 활용</h2>
    				<p>다른회원들의 일정표를 내 일정으로 등록하여 다양한 여행을 즐겨보세요!</p>
    			</div>  
    			<div class="sub_desc">
-   				<img src="../../file/img/sub_img3.png" class="sub_img">
+   				<img src="file/img/sub_img3.png" class="sub_img">
    				<h2 class="sub_title">지도를 통한 경로 확인</h2>
    				<p>지도를 통해 좌표를 보여주는 형식으로 간단한 길 찾기부터 사람들의 다양한 정보까지!</p>
    			</div>  
-   			<a href="mbti_start_sub.jsp"><button class="btn"><image class="startbtn_img" id="startbtn2" src="../../file/img/startbtn2.png" alt="시작하기"></button></a>
+   			<a href="lmth/mbti/mbti_start_sub.jsp"><button class="btn"><image class="startbtn_img" id="startbtn2" src="file/img/startbtn2.png" alt="시작하기"></button></a>
    		</div>
    </div>
 </div>

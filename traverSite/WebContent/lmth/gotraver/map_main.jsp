@@ -102,7 +102,7 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveLodging) { %>
 		<!-- 숙소 -->
 		<div class="place-section">
-		<% if (placeCategory == null || placeCategory == "0") { %>
+		<% if (placeCategory == null || placeCategory.equals("0")) { %>
 			<div class="place-section__title">숙소</div>
 		<% } %>
 			<div class="place-list">
@@ -136,7 +136,7 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveRestaurant) {  %>
 		<!-- 음식점 -->
 		<div class="place-section">
-		<% if (placeCategory == null || placeCategory == "0") { %>
+		<% if (placeCategory == null || placeCategory.equals("0")) { %>
 			<div class="place-section__title">음식점</div>
 		<% } %>
 			<div class="place-list">
@@ -172,7 +172,7 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<% if (isHaveTourist) {  %>
 		<!-- 관광지 -->
 		<div class="place-section">
-		<% if (placeCategory == null || placeCategory == "0") { %>
+		<% if (placeCategory == null || placeCategory.equals("0")) { %>
 			<div class="place-section__title">관광지</div>
 		<% } %>
 			<div class="place-list">
@@ -218,11 +218,11 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 <div class="main">
 	<div class="main-top_area">
 		<div class="schedule_date">
-			 <input type="date" class="" id="sdate" name="sdate" onchange="limitDate();">~
+			 <input type="date" class="" id="sdate" name="sdate" onchange="limitDate(); setDay(this.value, this.form.edate.value, this.form.schedule_day);">~
 			 <input type="date" id="edate" name="edate" disabled onchange="setDay(this.form.sdate.value, this.value, this.form.schedule_day);">
 		</div>
 		<div class="">
-			<select name="schedule_day" class="schedule_day" onchange="getDate(this.value, this.form.sdate.value);">
+			<select id="schedule_day" name="schedule_day" class="schedule_day" onchange="getDate(this.value, this.form.sdate.value);">
 				<option value="" class="schedule_day1">일차 선택</option>
 			</select>
 			<select name="schedule_group" class="schedule_group" id="">
@@ -331,8 +331,8 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 <script>
 var mapContainer = document.getElementById('map'),  // 지도를 표시할 div 
 mapOption = { 
-    center: new kakao.maps.LatLng(33.4080, 126.60000), // 지도의 중심좌표
-    level: 10 // 지도의 확대 레벨
+	center: new kakao.maps.LatLng(33.3580, 126.57000), // 지도의 중심좌표
+    level: 9 // 지도의 확대 레벨
 };
 
 window.onresize = function(event){ // 윈도우 크기 size 변경되면 
