@@ -2,7 +2,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="java.time.*" %>
 <%
-request.setCharacterEncoding("utf-8");
+request.setCharacterEncoding("utf-8"); // traverSite
 
 
 String[] arrDomain = {"naver.com", "nate.com", "gmail.com", "daum.net", "yahoo.com"};
@@ -55,13 +55,13 @@ String[] arrDomain = {"naver.com", "nate.com", "gmail.com", "daum.net", "yahoo.c
 	height:40px; width:80px; 
 	margin-top:20px; 
 }
-#fontBlue { font-weight:bold; color:blue; }
-#fontRed { font-weight:bold; color:red; }
+.fontBlue { font-weight:bold; color:blue; }
+.fontRed { font-weight:bold; color:red; }
 .btnChk { height:36px; }
 </style>
 <script src="/traverSite/file/jq/jquery-3.6.1.js"></script>
 <script>
-$(document).ready(function() {
+$(document).ready(function() { // 이메일 도메인 선택 시 우측 input에 자동 입력
     $("#e2").change(function() {
         if ($(this).val() == "") {
             $("#e3").val("");
@@ -74,30 +74,89 @@ $(document).ready(function() {
     });
 });
 
-function chkDupId(uid) {    // id중복체크 등 다 이걸로!
-   //	var regEngNum = /^[A-Za-z0-9+]*$/; 
+function chkDup(kind, input) { // id,닉네임 중복체크
+	var regEngNum = /^[A-Za-z0-9+]*$/; 
+	if ( kind == 'i' ) {
+		if (regEngNum.test(input)) { //id가 영문과 숫자로만 이루어져 있으면
+		    if (input.length >= 6) {  //id가 6자 이상이면
+		        $.ajax({
+		            type : "POST",             
+		            url : "/traverSite/dup",   
+		            data : {"uid" : input},       
+		            success : function(chkRs) {
+		                var msg = "";          
+		                if (chkRs == 0) {      
+		                    msg = "<p class='fontBlue'>사용 가능한 아이디 입니다.</p>";
+		                    $("#idChk").val("y");   
+		                } else {                
+		                    msg = "<p class='fontRed'>이미 사용중인 아이디입니다.</p>";
+		                    $("#idChk").val("n");   
+		                }
+		                $("#idMsg").html(msg);
+		            }
+		        });
+		    } else { 
+		    	$("#idMsg").text("※ 6 ~ 20자 이내로 영문과 숫자를 조합해주세요.");
+			    $("#idChk").val("n");   
+		    }
+		} else {
+			$("#idMsg").text("※ 6 ~ 20자 이내로 영문과 숫자를 조합해주세요.");
+		    $("#idChk").val("n"); 
+		}
+	} else if ( kind == 'n') {
+		if (input.length <= 20) {  
+	        $.ajax({
+	            type : "POST",             
+	            url : "/traverSite/dup",     
+	            data : {"nickname" : input},      
+	            success : function(chkRs) { 
+	                var msg = "";         
+	                if (chkRs == 0) {       
+	                    msg = "<p class='fontBlue'>사용 가능한 닉네임 입니다.</p>";
+	                    $("#nicknameChk").val("y");   
+	                } else {                
+	                    msg = "<p class='fontRed'>이미 사용중인 닉네임입니다.</p>";
+	                    $("#nicknameChk").val("n");   
+	                }
+	                $("#nickNameMsg").html(msg);
+	            }
+	        });
+	    } else { 
+	    	$("#nickNameMsg").text("※ 20자 이내로 입력해주세요.");
+		    $("#nicknameChk").val("n");   
+	    }
+	}
+}
 
-    if (uid.length >= 6) {  //id가 6자 이상이면
-        $.ajax({
-            type : "POST",              // 데이터 전송방법
-            url : "/mvcSite/dupId",     // 전송한 데이터를 받을 서버의 URL로 컨트롤러(서블릿)를 의미
-            data : {"uid" : uid},       // 지정한 url로 보낼 데이터의 이름과 값
-            success : function(chkRs) { // 데이터를 보내 실행한 결과를 chkRs로 받아 옴
-                var msg = "";           // 사용자에게 보여줄 메시지를 저장할 변수
-                if (chkRs == 0) {       // uid와 동일한 기존의 회원 아이디가 없으면
-                    msg = "<p id='fontBlue'>사용 가능한 아이디 입니다.</p>";
-                    $("#idChk").val("y");   // 아이디 중복체크를 성공한 상태로 변경
-                } else {                // uid와 동일한 기존의 회원 아이디가 있으면
-                    msg = "<p id='fontRed'>이미 사용중인 아이디입니다.</p>";
-                    $("#idChk").val("n");   // 아이디 중복체크를 하지 않거나 실패한 상태로 변경
-                }
-                $("#idMsg").html(msg);
-            }
-        });
-    } else { //id가 6자 미만이면
-    	$("#idMsg").text("※ 6 ~ 20자 이내로 영문과 숫자 조합해주세요.");
-	    $("#idChk").val("n");   // 아이디 중복체크를 하지 않거나 실패한 상태로 변경
-    } 
+function chkPw(pw) {
+	var regEngNum = /^[A-Za-z0-9]*$/;
+	var msg = ""; 
+	if (regEngNum.test(pw)) { 
+		if (pw.length >= 6) {
+			msg = "<p class='fontBlue'>사용 가능한 비밀번호입니다.</p>";
+			$("#pwChk").val("y");
+		} else {
+			msg = "<p>※ 6 ~ 20자 이내로 영문과 숫자를 조합해주세요.</p>";
+			$("#pwChk").val("n");   
+		}
+	} else {
+		msg = "※ 6 ~ 20자 이내로 영문과 숫자를 조합해주세요.";
+		$("#pwChk").val("n");   
+	}
+	$("#pwMsg").html(msg);
+}
+
+
+function chkEqualPw (pw, chkPw) {
+	var msg = ""; 
+	if ( pw == chkPw) {
+		msg = "<p class='fontBlue'>비밀번호가 동일합니다.</p>"
+		$("#pwChk2").val("y"); 
+	} else {
+		msg = "<p>비밀번호가 동일하지 않습니다.</p>"
+		$("#pwChk2").val("n"); 
+	}
+	$("#pwMsg2").html(msg);
 }
 </script>
 </head>
@@ -109,24 +168,27 @@ function chkDupId(uid) {    // id중복체크 등 다 이걸로!
 
 	<div class=joinForm_box>
 		<h2 class="main_title">회원 가입</h2>
-		<form name="frmJoin" action="#" method="post">
+		<form name="frmJoin" action="member_proc.mem" method="post">
 		<input type="hidden" name="kind" value="in" /> <!-- 회원가입 : kind=in -->
 		<input type="hidden" name="idChk" id="idChk" value="n" /> 
+		<input type="hidden" name="nicknameChk" id="nicknameChk" value="n" />
+		<input type="hidden" name="pwChk" id="pwChk" value="n" /> 
+		<input type="hidden" name="pwChk2" id="pwChk2" value="n" /> 
 		    <div class="idbox">
 		    	<span class="asterik">*</span><span class="title">아이디</span>
 			    <input type="text" name="mi_id" required="required" id="mi_id" class="box" maxlength="20" 
-			    size="25" placeholder="아이디를 입력해 주세요." onkeyup="chkDupId(this.value);" />
-			    <p id="idMsg" class="box2">※ 6 ~ 20자 이내로 영문과 숫자 조합해주세요.</p>
+			    size="25" placeholder="아이디를 입력해 주세요." onkeyup="chkDup('i',this.value);" />
+			    <p id="idMsg" class="box2">※ 6 ~ 20자 이내로 영문과 숫자를 조합해주세요.</p>
 		    </div><br />
 		    
 		    <div class="pwbox">
 		    	<span class="asterik">*</span><span class="title">비밀번호</span>
 			    <input type="password" name="mi_pw" required="required" id="mi_pw" class="box" maxlength="20" 
-			    size="25" placeholder="비밀번호를 입력해 주세요." onkeyup="chkDupPw(this.value);" />
-			    <p id="pwMsg" class="box2">※ 6 ~ 20자 이내로 영문과 숫자 조합해주세요.</p>
+			    size="25" placeholder="비밀번호를 입력해 주세요." onkeyup="chkPw(this.value);" />
+			    <p id="pwMsg" class="box2">※ 6 ~ 20자 이내로 영문과 숫자를 조합해주세요.</p>
 			    <input type="password" name="mi_pw2" required id="mi_pw2" class="box" maxlength="20" 
-			    size="25" placeholder="비밀번호를 다시 입력해 주세요." onkeyup="chkDupPw(this.value);" />
-                <p id="pwMsg2" class="box2">비밀번호가 동일합니다.</p>
+			    size="25" placeholder="비밀번호를 다시 입력해 주세요." onkeyup="chkEqualPw(this.form.mi_pw.value, this.value);" />
+                <p id="pwMsg2" class="box2">비밀번호가 동일하지 않습니다.</p>
 		    </div><br />
 		    
 		    <div class="namebox">
@@ -138,7 +200,7 @@ function chkDupId(uid) {    // id중복체크 등 다 이걸로!
 		    <div class="nicknamebox">
 		    	<span class="asterik">*</span><span class="title">닉네임</span>
 	            <input type="text" name="mi_nickname" required="required" id="mi_nickname" class="box" maxlength="20" 
-	            size="25" placeholder="닉네임을 입력해 주세요." onkeyup="chkDupNickNm(this.value);" />
+	            size="25" placeholder="닉네임을 입력해 주세요." onkeyup="chkDup('n',this.value);" />
 	            <p id="nickNameMsg" class="box2">※ 20자 이내로 입력해주세요.</p>
             </div><br />
 		    

@@ -28,8 +28,8 @@ public class LoginCtrl extends HttpServlet {
 			session.setAttribute("loginInfo", loginInfo);
 			session.setMaxInactiveInterval(1800);
 			response.sendRedirect(url);
-	        ArrayList<PlaceInfo> addPlaceList = new ArrayList<PlaceInfo>(); // 내 일정에 담은 장소를 저장할 PlaceList
-	        session.setAttribute("addPlaceList", addPlaceList); //세션에 담기
+	        ArrayList<ScheduleDay> scheduleDayList = new ArrayList<ScheduleDay>(); // 내 일정에 담은 장소를 저장할 PlaceList
+	        session.setAttribute("scheduleDayList", scheduleDayList); //세션에 담기
 			
 		} else {	// 로그인 실패시
 			response.setContentType("text/html; charset=utf-8");

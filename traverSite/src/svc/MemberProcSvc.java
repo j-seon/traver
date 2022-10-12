@@ -6,7 +6,7 @@ import java.sql.*;
 import dao.*;
 import vo.*;
 
-public class MemberProcSvc {
+public class MemberProcSvc { // traverSite
 	public int memberProc(String kind, MemberInfo memberInfo) {
 		Connection conn = getConnection();
 		MemberProcDao memberProcDao = MemberProcDao.getInstance();

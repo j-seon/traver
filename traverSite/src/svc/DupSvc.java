@@ -6,13 +6,13 @@ import java.sql.*;
 import dao.*;
 import vo.*;
 
-public class DupIdSvc {
-	public int chkDupId(String uid) {
+public class DupSvc {
+	public int chkDup(String kind, String input) {
 		int result = 0;
 		Connection conn = getConnection();
-		DupIdDao dupIdDao = DupIdDao.getInstance();
-		dupIdDao.setConnection(conn);
-		result = dupIdDao.chkDupId(uid);
+		DupDao dupDao = DupDao.getInstance();
+		dupDao.setConnection(conn);
+		result = dupDao.chkDup(kind, input);
 		close(conn);
 
 		return result;
