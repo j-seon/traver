@@ -2,7 +2,7 @@ package vo;
 
 public class PlaceInfo {
 	private String pi_id, pi_name, pi_phone, pi_link, pi_coords, pi_addr1, pi_addr2, pi_zip;
-	private String pi_img1, pi_img2,  pi_img3, pi_img4, pi_img5, pi_desc, pi_ctgr, pi_date;
+	private String pi_img1, pi_img2,  pi_img3, pi_img4, pi_img5, pi_desc, pi_ctgr, pi_date, pi_isview;
 	private int pi_review;
 	
 	public String getPi_id() {
@@ -102,7 +102,13 @@ public class PlaceInfo {
 	public void setPi_date(String pi_date) {
 		this.pi_date = pi_date;
 	}
-	public int getPi_review() {
+	public String getPi_isview() {
+        return pi_isview;
+    }
+    public void setPi_isview(String pi_isview) {
+        this.pi_isview = pi_isview;
+    }
+    public int getPi_review() {
 		return pi_review;
 	}
 	public void setPi_review(int pi_review) {

@@ -158,7 +158,7 @@ function checkSize(input) {
                   </tr>
                   <tr>
                      <th scope="row">위치</th>
-                     <td colspan="3">
+                     <td>
                         <div class="location_sty_01">
                            <input type="text" id="sample6_postcode" placeholder="우편번호" readonly="readonly" name="pf_postcode"> 
                            <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" style="vertical-align: middle;">
@@ -171,6 +171,13 @@ function checkSize(input) {
                            <input type="text" id="sample6_extraAddress" placeholder="여분주소" name="pf_extraAddress">
                         </div>
                          <input type="hidden" id="sample6_addressCoords" value="" name="pf_addressCoords">
+                     </td>
+                     <th scope="row">게시 여부</th>
+                     <td>
+                     	<select class="sel_style">
+                     		<option value="1">게시</option>
+                     		<option value="2">게시 중단</option>
+                     	</select>
                      </td>
                   </tr>
                   <tr>

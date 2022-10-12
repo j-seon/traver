@@ -28,8 +28,8 @@ public class AdminPlaceListCtrl extends HttpServlet {
             cpage = Integer.parseInt(request.getParameter("cpage"));
         // cpage 값이 있으면 받아서 int형으로 형변환 시킴(보안상의 이유와 산술연산을 해야 하기 때문)
 		
-		String schtype = request.getParameter("schtype"); // 검색조건(장소명, 번호, 분류, 등록일, 주소)
-        String keyword = request.getParameter("keyword");   // 검색어
+		String schtype = request.getParameter("schtype"); // 검색조건(장소명, 번호, 분류, 게시 여부, 등록일, 주소)
+        String keyword = request.getParameter("keyword");   // 검색어 
         String where = "";      // 검색 조건이 있을 경우 where절을 저장할 변수
         if (schtype == null || keyword == null) {
             schtype = "";   keyword = "";

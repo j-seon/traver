@@ -17,6 +17,7 @@ if (schtype != null && !schtype.equals("") && keyword != null && !keyword.equals
 	// 검색조건과 검색어가 있으면 검색관련 데이터들을 쿼리스트링으로 지정
 }
 args = "&cpage=" + cpage + schargs;
+
 %>
 <!DOCTYPE html>
 <html>
@@ -28,22 +29,33 @@ args = "&cpage=" + cpage + schargs;
 <script src="/traverSite/lmth/admin/file/js/jquery-3.6.1.js"></script>
 <script>
 function adminPlaceDel(piid) {
-	// 장바구니 내의 특정 상품을 삭제하는 함수
-		if (confirm("정말 삭제하시겠습니까?")) {
-			$.ajax({
-				type : "POST", 
-				url : "/traverSite/adminPlaceProcDel", 
-				data : {"piid" : piid}, 
-				success : function(chkRs) {
-					if (chkRs == 0) {
-						alert("장소 삭제에 실패했습니다.\n다시 시도하세요.");
-					}
-					location.reload();
+// 장바구니 내의 특정 상품을 삭제하는 함수
+	if (confirm("정말 삭제하시겠습니까?")) {
+		$.ajax({
+			type : "POST", 
+			url : "/traverSite/adminPlaceProcDel", 
+			data : {"piid" : piid}, 
+			success : function(chkRs) {
+				if (chkRs == 0) {
+					alert("장소 삭제에 실패했습니다.\n다시 시도하세요.");
 				}
-			});
-		}
+				location.reload();
+			}
+		});
 	}
+}
 
+function getSelectedValues() {
+// 체크박스들 중 선택된 체크박스들의 값들을 쉼표로 구분하여 문자열로 리턴하는 함수
+	var chk = document.frm_place_table.chk;
+	var idxs = "";	// chk컨트롤 배열에서 선택된 체크박스의 값들을 누적 저장할 변수(ex 1,2,3)
+	for (var i = 0 ; i < chk.length ; i++) {
+		if (chk[i].checked)	idxs += "," + chk[i].value;
+	}
+	adminPlaceDel(idxs.substring(1))
+	return idxs.substring(1);
+}
+	
 $(document).ready(function() {
 	$("#chkAll").click(function() {
 		if($("#chkAll").is(":checked")) $("input[name=chk]").prop("checked", true);
@@ -74,24 +86,16 @@ $(document).ready(function() {
 						<option value="phone" <% if (schtype.equals("phone")) { %>selected="selected" <% } %>>번호</option>
 						<option value="ctgr" <% if (schtype.equals("ctgr")) { %>selected="selected" <% } %>>분류</option>
 						<option value="date" <% if (schtype.equals("date")) { %>selected="selected" <% } %>>등록일</option>
+						<option value="isview" <% if (schtype.equals("isview")) { %>selected="selected" <% } %>>게시여부</option>
 						<option value="addr1" <% if (schtype.equals("addr1")) { %>selected="selected" <% } %>>주소</option>
 					</select> 
 					<input type="text" name="keyword" placeholder="검색란" value="<%=keyword %>"> 
-					<input type="submit" value="찾기">
+					<input type="submit" value="찾기" style="cursor: pointer;">
 				</form>
 				<form action="placeFormIn" name="frm_place_svc" method="post">
 					<ul>
 						<li><span class="count">총 장소 : <span class="place_num"><%=rcnt %></span></span></li>
-						<%
-						if (placeInfo.size() > 0) {
-							for (int i = 0; i < placeInfo.size(); i ++){
-								PlaceInfo pi_id = placeInfo.get(i);
-								String piid = pi_id.getPi_id();
-							
-						
-						%>
-						<li><input type="button" value="장소 삭제" id="placeDel" onclick="adminPlaceDel(<%=piid %>)"></li>
-						<% }} %>
+						<li><input type="button" value="장소 삭제" id="placeDel" onclick="getSelectedValues()"></li>
 						<li><input type="button" value="장소 추가" id="placeIn" onclick="location.href='/traverSite/lmth/admin/02_place/place_form_in.jsp';"></li>
 					</ul>
 				</form>
@@ -103,12 +107,13 @@ $(document).ready(function() {
 					<thead>
 						<tr>
 							<th scope="col"><input type="checkbox" id="chkAll"></th>
-							<th scope="col">장소명</th>
-							<th scope="col">번호</th>
-							<th scope="col">분류</th>
-							<th scope="col">등록일</th>
-							<th scope="col">주소</th>
-							<th scope="col">관리</th>
+							<th scope="col">장 소 명</th>
+							<th scope="col">번 호</th>
+							<th scope="col">분 류</th>
+							<th scope="col">등 록 일</th>
+							<th scope="col">게 시 여 부</th>
+							<th scope="col">주 소</th>
+							<th scope="col">관 리</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -116,7 +121,7 @@ $(document).ready(function() {
 					if (placeInfo.size() > 0) {	
 						for (int i = 0; i < placeInfo.size(); i++) {
 							PlaceInfo pi = placeInfo.get(i);
-								%>
+								%> 
 								<tr align="center">
 									<td><input type="checkbox" name="chk" value="<%=pi.getPi_id() %>"></td>
 									<td><%=pi.getPi_name() %></td>
@@ -131,13 +136,20 @@ $(document).ready(function() {
 									<% } %>
 									</td>
 									<td><%=pi.getPi_date() %></td>
+									<td>
+									<% if (pi.getPi_isview().equals("y")) { %>
+									게시 중
+									<% } else if (pi.getPi_isview().equals("n")) { %>
+									게시 중단
+									<% } %>
+									</td>
 									<td><%=pi.getPi_addr1() %></td>
-									<td><input type="button" value="수정" onclick="location.href='#'"></td>
+									<td><input type="button" value="수정" onclick="location.href='adminPlaceFormUp'" class="place_btn_type"></td>
 								</tr>
 								<%
 						}
 					} else {	// 글목록이 없으면
-						out.println("<tr><td colspan='7' align='center'>");
+						out.println("<tr><td colspan='8' align='center'>");
 						out.println("검색결과가 없습니다.</td></tr>");
 					}
 					%>

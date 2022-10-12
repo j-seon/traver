@@ -103,7 +103,7 @@ function bbs_02_img_chn() {
                 							</div>
 										</td>
 										<td>test1244@naver.com</td>
-										<td><input type="button" value="수정" onclick=""></td>
+										<td><input type="button" value="수정" onclick="" class="bbs_02_btn_type"></td>
 									</tr>
 								</tbody>
 							</table>
