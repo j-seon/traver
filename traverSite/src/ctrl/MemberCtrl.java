@@ -9,9 +9,9 @@ import javax.servlet.http.*;
 import act.*;
 import vo.*;
 
-@WebServlet("*.mem")	// 마지막 4글자가 '.mem'인 모든 요청을 받겠다는 의미
+@WebServlet("*.mem")	// 회원 관련 작업(가입, 정보수정, 탈퇴) traverSite
 public class MemberCtrl extends HttpServlet {
-// 회원 관련 작업(가입, 정보수정, 탈퇴)의 연결(Model과 View)을 담당하는 컨트롤러
+
 	private static final long serialVersionUID = 1L;
     public MemberCtrl() { super(); }
 
@@ -20,12 +20,11 @@ public class MemberCtrl extends HttpServlet {
     	String requestUri = request.getRequestURI();
     	String contextPath = request.getContextPath();
     	String command = requestUri.substring(contextPath.length());
-    	
     	ActionForward forward = null;
     	Action action = null;
     	
     	switch (command) {
-    	case "/member/member_proc.mem" :
+    	case "/lmth/member/member_proc.mem" :
     		action = new MemberProcAct();
     		break;
     	}

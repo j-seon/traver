@@ -9,7 +9,7 @@ import vo.*;
 
 
 
-@WebServlet("/MBTIMain")
+@WebServlet("/MBTIMain") // Best여행 클릭 시 MBTI값 여부에 따라 다른 컨트롤러로 이동
 public class MBTIMainCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -5,7 +5,7 @@ import java.util.*;
 import java.sql.*;
 import vo.*;
 
-public class MemberProcDao {
+public class MemberProcDao { //traverSite
 	private static MemberProcDao memberProcDao;
 	private Connection conn;
 	private MemberProcDao() {}

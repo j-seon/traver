@@ -71,7 +71,7 @@ function selectAll(selectAll) {
 	   	<div class="chkbox_group">
 		   	<h2 class="title" >트레버 이용약관 동의</h2><hr/>
 		   	
-			<form name="frmChk" action="#" method="post">
+			<form name="frmChk" action="join_form.jsp" method="post">
 				<div class="check1">
 					<label class="r1">
 						<input type="checkbox" name="chk" value="1" required="required" onclick="checkSelectAll();" />
