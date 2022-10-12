@@ -1,5 +1,61 @@
 package vo;
 
 public class ScheduleInfo {
-
+    private int si_id, si_dnum; 
+    private String mi_id, si_sdate, si_edate, si_date, si_last, si_name, si_isTake;
+    
+    public int getSi_id() {
+        return si_id;
+    }
+    public void setSi_id(int si_id) {
+        this.si_id = si_id;
+    }
+    public int getSi_dnum() {
+        return si_dnum;
+    }
+    public void setSi_dnum(int si_dnum) {
+        this.si_dnum = si_dnum;
+    }
+    public String getMi_id() {
+        return mi_id;
+    }
+    public void setMi_id(String mi_id) {
+        this.mi_id = mi_id;
+    }
+    public String getSi_sdate() {
+        return si_sdate;
+    }
+    public void setSi_sdate(String si_sdate) {
+        this.si_sdate = si_sdate;
+    }
+    public String getSi_edate() {
+        return si_edate;
+    }
+    public void setSi_edate(String si_edate) {
+        this.si_edate = si_edate;
+    }
+    public String getSi_date() {
+        return si_date;
+    }
+    public void setSi_date(String si_date) {
+        this.si_date = si_date;
+    }
+    public String getSi_last() {
+        return si_last;
+    }
+    public void setSi_last(String si_last) {
+        this.si_last = si_last;
+    }
+    public String getSi_name() {
+        return si_name;
+    }
+    public void setSi_name(String si_name) {
+        this.si_name = si_name;
+    }
+    public String getSi_isTake() {
+        return si_isTake;
+    }
+    public void setSi_isTake(String si_isTake) {
+        this.si_isTake = si_isTake;
+    }
 }
