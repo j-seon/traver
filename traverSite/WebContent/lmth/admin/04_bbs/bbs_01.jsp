@@ -71,7 +71,7 @@
 										<td>2022-09-01 18:47:12</td>
 										<td>112.174.123.822</td>
 										<td>12</td>
-										<td><input type="button" value="수정" onclick="location.href='bbs_01_sub.jsp'"></td>
+										<td><input type="button" value="수정" onclick="location.href='bbs_01_sub.jsp'" class="bbs_01_btn_type"></td>
 									</tr>
 								</tbody>
 							</table>

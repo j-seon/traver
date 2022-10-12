@@ -56,8 +56,7 @@
 							<td>제주여행 7박 8일짜리!!</td>
 							<td>112.174.123.822</td>
 							<td>2022-09-01 18:47:12</td>
-							<td><input type="button" value="수정"
-								onclick="location.href='#'"></td>
+							<td><input type="button" value="수정" onclick="location.href='#'" class="sch_btn_type"></td>
 						</tr>
 					</tbody>
 				</table>

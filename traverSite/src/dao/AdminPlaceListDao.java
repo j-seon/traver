@@ -30,7 +30,7 @@ public class AdminPlaceListDao {
         
             try {
                 stmt = conn.createStatement();
-                String sql = "select pi_id, pi_name, pi_phone, pi_ctgr, pi_date, pi_addr1 " + 
+                String sql = "select pi_id, pi_name, pi_phone, pi_ctgr, pi_date, pi_isview, pi_addr1 " + 
                         " from t_place_info " + where + " order by pi_id desc " + 
                         " limit " + ((cpage -1) * psize) + ", " + psize;
                 rs = stmt.executeQuery(sql);
@@ -41,6 +41,7 @@ public class AdminPlaceListDao {
                     pl.setPi_phone(rs.getString("pi_phone"));
                     pl.setPi_ctgr(rs.getString("pi_ctgr"));
                     pl.setPi_date(rs.getString("pi_date"));
+                    pl.setPi_isview(rs.getString("pi_isview"));
                     pl.setPi_addr1(rs.getString("pi_addr1"));
                     placeInfo.add(pl);
                 }

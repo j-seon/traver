@@ -65,7 +65,7 @@
 							<td>정상</td>
 							<td>2022-09-28</td>
 							<td>충청남도 천안시 동남구 구성동 정골 1길 55-5번지</td>
-							<td><input type="button" value="수정" onclick="location.href='./mem_02.jsp'"></td>
+							<td><input type="button" value="수정" onclick="location.href='./mem_02.jsp'" class="mem_btn_type"></td>
 						</tr>
 					</tbody>
 				</table>
