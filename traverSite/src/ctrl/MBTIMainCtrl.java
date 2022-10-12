@@ -1,0 +1,51 @@
+package ctrl;
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import svc.*;
+import vo.*;
+
+
+
+@WebServlet("/MBTIMain")
+public class MBTIMainCtrl extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    public MBTIMainCtrl() { super(); }
+    
+	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+	    HttpSession session = request.getSession();
+	    
+	    if(session.getAttribute("loginInfo")!=null) {  // 로그인 되어 있으면
+    	    MemberInfo loginInfo = (MemberInfo)session.getAttribute("loginInfo");
+    	    String mimbti = loginInfo.getMi_mbti();
+    	    System.out.println(mimbti);
+    	    if ( mimbti != null && !mimbti.equals("") ) { // mbti값이 있으면
+    	        RequestDispatcher dispatcher = 
+                        request.getRequestDispatcher("lmth/mbti/mbti_main.jsp");
+                    dispatcher.forward(request, response);
+    	    } else {
+    	        RequestDispatcher dispatcher = 
+                        request.getRequestDispatcher("lmth/mbti/mbti_start_main.jsp");
+                dispatcher.forward(request, response);
+    	    }
+	    } else { // 로그인 되어 있지 않으면
+	        RequestDispatcher dispatcher = 
+                    request.getRequestDispatcher("lmth/mbti/mbti_start_main.jsp");
+            dispatcher.forward(request, response);
+	    }
+                
+	}
+	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doProcess(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doProcess(request, response);
+    }
+
+}
