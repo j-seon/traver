@@ -20,7 +20,7 @@ public class MemberProcAct implements Action {
 		if (kind.equals("in") || kind.equals("up")) {
 		// 현재 처리하는 작업이 회원 가입이나 정보 수정일 경우
 			memberInfo.setMi_nickname(request.getParameter("mi_nickname"));
-			memberInfo.setMi_nickname(request.getParameter("mi_mbti"));
+			memberInfo.setMi_mbti(request.getParameter("mi_mbti"));
 			memberInfo.setMi_mail(request.getParameter("e1") + "@" + 
 			request.getParameter("e3"));
 		}
