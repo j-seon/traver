@@ -24,7 +24,7 @@ if (loginInfo != null)  isLogin = true;
 					<a href="/traverSite/MBTIMain" class="gnb_link_menu">MBTI 여행</a>
 					<ul class="gnb_link_sub link_sub1">
 						<li><a href="/traverSite/lmth/mbti/mbti_main.jsp">Best 여행</a></li>
-						<li><a href="/traverSite/lmth/mbti/mbti_list.jsp">여행 전체보기</li>
+						<li><a href="/traverSite/lmth/mbti/mbti_list.jsp">여행 전체보기</a></li>
 					</ul>
 				</li>
 				<li>

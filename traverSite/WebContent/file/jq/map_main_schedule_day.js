@@ -5,19 +5,16 @@ window.addEventListener("load", function() {
 	for (let i = 0; i < addBtnList.length; i++) {
 		let btn = addBtnList.item(i);
 		
-		
-		
 		btn.addEventListener("click", function(event) { // 모든 '추가' 버튼에 클릭 eventListener 추가
 			let place = event.currentTarget; // 이벤트가 발생한 '현재 엘리먼트'을 가져온다
 			let piid = place.getAttribute("value");
 			console.log(piid);
-			
 			let piname = place.parentElement.parentElement.querySelector('.place__title').innerText;
 			console.log(piname);
 
 			$.ajax({
 				type : "POST",
-				url : "/traverSite/addPlace",
+				url : "/traverSite/scheduleDay",
 				data : {
 					"piid" : piid,
 					"piname" : piname

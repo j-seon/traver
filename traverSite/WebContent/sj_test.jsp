@@ -47,7 +47,7 @@
 
 				$.ajax({
 					type : "POST",
-					url : "/traverSite/test",
+					url : "scheduleDay",
 					data : {
 						"piid" : piid,
 						"piname" : piname
@@ -66,11 +66,11 @@
 </script>
 <body>
 	<%
-		ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>) session.getAttribute("addPlaceList"); // 세션에있는 어레이리스트 값 받아오기
-		for (int i = 0; i < addPlaceList.size(); i++) {
+		ArrayList<ScheduleDay> scheduleDayList = (ArrayList<ScheduleDay>)session.getAttribute("scheduleDayList");
+		for (int i = 0; i < scheduleDayList.size(); i++) {
 			// 장소 이름 뽑아낼 반복문! 
-			String piname = addPlaceList.get(i).getPi_name();
-			String piid = addPlaceList.get(i).getPi_id();
+			String piname = scheduleDayList.get(i).getPi_name();
+			String piid = scheduleDayList.get(i).getPi_id();
 	%>
 	<h2><%=piname%></h2>
 	<h2><%=piid%></h2>
