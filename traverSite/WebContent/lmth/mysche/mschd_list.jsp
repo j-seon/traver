@@ -1,10 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>내 일정 목록</title>
+<script>
+link = 'mschdList';
+function enterKey(e) {
+    if (e.keyCode == 13){
+   		location.href = link;
+    }
+}
+</script>
 <style>
 .container-default_box { padding: 0px 40px 0px 40px; }
 
@@ -54,6 +61,20 @@ input[type="text"] { height:23px; border: none; }
 </head>
 <body>
 <%@ include file="../../cni/header.jsp" %>
+<%
+request.setCharacterEncoding("utf-8");
+ArrayList<ScheduleInfo> scheduleList = (ArrayList<ScheduleInfo>)request.getAttribute("scheduleList");
+// 자유게시판 글목록이 들어있는 ArrayList<ScheduleInfo>를 형변환하여 받아옴
+
+String keyword =  (String)request.getParameter("keyword");
+String schargs = "";
+if (keyword != null && !keyword.equals("")) {// 검색어가 있으면
+	schargs = "&keyword=" + keyword; // ???????????????????????????????????
+	// 검색어가 있으면 검색관련 데이터들을 쿼리스트링으로 저장
+}
+
+%>
+
 <div class="container">
    <div class="container-default_box">
    <div class="contents_con">
@@ -61,27 +82,33 @@ input[type="text"] { height:23px; border: none; }
 	   		<div class="sch_h2">
 	   			<a href="mschd_list.jsp" id="title"><span id="subtitle">내 일정</span></a>
 	   		</div>
-	   		<div class="sch_contor">
-		   		<select class="year">
-					<option value="total">전체보기</option>
-					<option value="2022">2022</option>
-					<option value="2021">나중에 수정</option>
-				 </select>
-				 <select class="o">
-					<option value="datedesc">등록 최신 순</option>
-					<option value="dateasc">등록 오래된 순</option>
-				 </select>
-				 <span> 총 일정 수 : </span>
-				 <div id="schbox">
-				 	<select class="sch">
-						<option value="schdname">일정 제목</option>
-						<option value="place">장소명</option>
-					</select>
-				 	<div id= "search-box" >
-					 	<input type="text"><button class="btn"><img src="../../file/img/x.png" id="x-sch"></button>
-					</div>
+	   		
+	   		<form name="frmSch" method="get">
+		   		<div class="sch_contor">
+			   		<select class="year">
+						<option value="total">전체보기</option>
+						<option value="2022">2022</option>
+						<option value="2021">나중에 수정</option>
+					 </select>
+					 <select class="o">
+						<option value="datedesc">등록 최신 순</option>
+						<option value="dateasc">등록 오래된 순</option>
+					 </select>
+					 <span> 총 일정 수 : </span>
+					 <!-- 추후 일정제목/장소명 셀렉트 박스는 삭제하고 검색박스만 남겨놓을 예정 -->
+					 <div id="schbox">
+					 	<select class="sch">
+							<option value="schdname">일정 제목</option>
+							<option value="place">장소명</option>
+						</select>
+					 	<div id= "search-box" >
+						 	<input type="text" name="keyword" value="<%=keyword %>" placeholder="일정제목으로 검색하세요." onkeyup="enterKey(e);">
+						 	<button class="btn"><img src="../../file/img/x.png" id="x-sch"></button>
+						</div>
+					 </div>
 				 </div>
-			 </div>
+			 </form>
+			 
 			 <br>
 			 <a href="mschd_detail.jsp">내 일정 디테일로</a><br><br>
 			 <a href="ischd_list.jsp">관심일정 리스트로</a>
