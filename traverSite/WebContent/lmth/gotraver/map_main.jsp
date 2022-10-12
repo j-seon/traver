@@ -39,7 +39,7 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 <script type="text/javascript" src="/traverSite/file/jq/map_main_move.js" ></script>
 <script type="text/javascript" src="/traverSite/file/jq/map_main_view.js" ></script>
-<script type="text/javascript" src="/traverSite/file/jq/map_main_add_place.js" ></script>
+<script type="text/javascript" src="/traverSite/file/jq/map_main_schedule_day.js" ></script>
 <script type="text/javascript" src="/traverSite/file/js/map_main_move.js" ></script>
 <script type="text/javascript" src="/traverSite/file/js/map_main_calendar.js" ></script>
 </head>
@@ -48,8 +48,7 @@ for (int i = 0; i < placeList.size(); i++ ) { // 장소들을 가져온다.
 <%@ include file="../../cni/header.jsp" %>
 <!-- 좌측 사이드박스 -->
 <% if (isLogin) { 
-ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("addPlaceList");
-
+ArrayList<ScheduleDay> scheduleDayList = (ArrayList<ScheduleDay>)session.getAttribute("scheduleDayList");
 %>
 
 <div class="left-side open">
@@ -60,12 +59,12 @@ ArrayList<PlaceInfo> addPlaceList = (ArrayList<PlaceInfo>)session.getAttribute("
 	<div class="schedule-area">
 		<ul class="schedule-list sortable">
 		<%
-		for (int i = 0; i < addPlaceList.size(); i ++) {	
-			PlaceInfo pi = addPlaceList.get(i);
+		for (int i = 0; i < scheduleDayList.size(); i ++) {	
+			ScheduleDay sd = scheduleDayList.get(i);
 		%>
-			<li class="schedule ui-state-default"><%= pi.getPi_name() %>
+			<li class="schedule ui-state-default"><%= sd.getPi_name() %>
 				<button type="button" class="schedule__del float_r" value="X" onclick="scheDel()">X</button>
-				<input type="hidden" data-id="<%= pi.getPi_id() %>"/>
+				<input type="hidden" data-id="<%= sd.getPi_id() %>"/>
 			</li>
 		<% } %>
 		</ul>

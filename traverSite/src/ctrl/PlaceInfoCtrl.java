@@ -14,6 +14,7 @@ public class PlaceInfoCtrl extends HttpServlet {
     public PlaceInfoCtrl() { super(); }
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    // 장소 idx를 가져와 장소정보 출력을위한 정보를 받아오는걸 연결할 컨트롤
 
 	}
 }
