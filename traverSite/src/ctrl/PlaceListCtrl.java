@@ -80,8 +80,8 @@ public class PlaceListCtrl extends HttpServlet {
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.println(placeList);
-		
+		out.println(placeList.size());
+
 		RequestDispatcher dispatcher = request.getRequestDispatcher("lmth/gotraver/map_main.jsp");
 		dispatcher.forward(request,	response);
 	}

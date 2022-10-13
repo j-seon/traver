@@ -29,6 +29,7 @@ public class PlaceListDao {
              stmt = conn.createStatement();
              String sql = "select * from t_place_info " + where;
                 // 목록 보여주는 쿼리
+             System.out.println(sql);
              rs = stmt.executeQuery(sql);
              while (rs.next()) {
                 pi = new PlaceInfo();
