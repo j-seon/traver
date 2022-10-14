@@ -171,7 +171,7 @@ $(document).ready(function() {
 	   			<option value="ENFJ" <% if ((mbtiPostList.get(0).getGp_mbti()).equals("ENFJ")) {%> selected <%}%>>ENFJ</option>
 	   			<option value="ENFP" <% if ((mbtiPostList.get(0).getGp_mbti()).equals("ENFP")) {%> selected <%}%>>ENFP</option>
 	   		</select>
-	   		<% if (loginInfo != null) { %>
+	   		<% if ( isLogin ) { %>
 	   		<a href="lmth/mbti/mbti_test.jsp"><button class="btn"><image id="retestbtn" src="file/img/" alt="재검사"></button></a>
 	   		<% } %>
 	   	</div><br><br>
@@ -192,6 +192,11 @@ $(document).ready(function() {
 				   	<% for (int i = 0; i < mbtiPostList.size(); i++) {
 				   			GoodPost mp = mbtiPostList.get(i);
 				   	%>
+				   	<% if ( isLogin ) { %>
+					<a href="postView?gpid=<%=mp.getGp_id() %>&miid=<%=loginInfo.getMi_id() %>">
+					<% } else { %>
+					<a href="postView?gpid=<%=mp.getGp_id() %>">
+					<% } %>
 				   		<div class="post">
 				   			<div class="post_title">
 				   				<%=mp.getGp_title() %><br>#박 #일 <span class="small">(##.##~##.##)</span>
@@ -200,6 +205,7 @@ $(document).ready(function() {
 				   				<img src="#" class="postimg">
 				   			</div>
 				   		</div>
+				   	</a>
 				   	<% } %>
 					</div>
 				</div>
@@ -220,6 +226,7 @@ $(document).ready(function() {
 					   	<% for (int i = 0; i < popPostList.size(); i++) {
 				   			GoodPost pp = popPostList.get(i);
 				   		%>
+				   		<a href="postView?gpid=<%=pp.getGp_id() %>">
 				   		<div class="post">
 				   			<div class="post_title">
 				   				<%=pp.getGp_title() %><br>#박 #일 <span class="small">(##.##~##.##)</span>
@@ -228,6 +235,7 @@ $(document).ready(function() {
 				   				<img src="#" class="postimg">
 				   			</div>
 				   		</div>
+				   		</a>
 				   	<% } %>
 					</div>
 				</div>

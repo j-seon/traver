@@ -233,9 +233,11 @@ $(document).ready(function() {
 						<img src="file/img/x.png" id="x-sch">
 					</button>
 				</div>
-				<a href="lmth/mbti/mbti_form_in.jsp"><button type="button" class="btn" id="gorecbtn">
-						<image src="file/img/" alt="일정 추천하기">
-					</button></a> <br> <br> <br>
+				<a href="lmth/mbti/mbti_form_in.jsp">
+				<button type="button" class="btn" id="gorecbtn">
+				<image src="file/img/" alt="일정 추천하기">
+				</button></a> 
+				<br><br><br>
 			</div>
 			<div id="bottom">
 				<div id="side">
@@ -330,19 +332,23 @@ $(document).ready(function() {
 				<div id="list">
 					<%
 						for (int i = 0; i < postList.size(); i++) {
-							GoodPost mp = postList.get(i);
+							GoodPost gp = postList.get(i);
 					%>
+					<% if ( isLogin ) {  System.out.println("로그인함 "); %>
+					<a href="postView?gpid=<%=gp.getGp_id() %>&miid=<%=loginInfo.getMi_id() %>">
+					<% } else { System.out.println("로그인안함 ");%>
+					<a href="postView?gpid=<%=gp.getGp_id() %>">
+					<% } %>
 					<div class="post">
 						<div class="post_title">
-							<%=mp.getGp_title()%><br>#박 #일 <span class="small">(##.##~##.##)</span>
+							<%=gp.getGp_title()%><br>#박 #일 <span class="small">(##.##~##.##)</span>
 						</div>
 						<div class="post_img">
 							<img src="#" class="postimg">
 						</div>
 					</div>
-					<% 
-					} 
-					%>
+					</a>
+					<% } %>
 				</div>
 			</div>
 		</div>

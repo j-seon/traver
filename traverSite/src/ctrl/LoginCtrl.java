@@ -22,7 +22,6 @@ public class LoginCtrl extends HttpServlet {
 		LoginSvc loginSvc = new LoginSvc(); 
 		MemberInfo loginInfo = loginSvc.getLoginMember(uid, pwd);
 
-		
 		if (loginInfo != null) { 	// 로그인 성공시
 			HttpSession session = request.getSession();
 			session.setAttribute("loginInfo", loginInfo);
